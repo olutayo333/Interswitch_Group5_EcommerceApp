@@ -1,0 +1,26 @@
+.line1{
+
+}
+.line1 ul{
+    list-style-type:none;
+    text-align: left; font-size: 14px;
+}
+.line1 ul li{
+    color: #616161;
+}
+.line1 ul li:hover{color: orange;}
+
+.line2 ul{
+    list-style-type:none; text-align: left; font-size: 14px;
+}
+.line2 ul li{ color: #616161;}
+.line3 ul{
+    list-style-type:none; text-align: left; font-size: 14px;
+}
+.line3 ul li{ color: #616161;}
+.line4 ul{
+    list-style-type:none; text-align: left; font-size: 14px;
+}
+.line4 ul li{ color: #616161;}
+
+/* .navbar .nav-item:hover .nav-link{ color: orange;  } */
