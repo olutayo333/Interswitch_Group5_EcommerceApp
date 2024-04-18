@@ -16,12 +16,13 @@ import Sports from './components/categories/Sports'
 import Toys from './components/categories/Toys'
 import Footer from './components/Footer'
 import Search from './components/Search'
+
 function App() {
-
-
   return (
-    <>
+    <> 
+    {/* <Layout /> */}
     <BrowserRouter>
+    
       <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path="mod" element={<Mod/>} />
@@ -44,4 +45,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
