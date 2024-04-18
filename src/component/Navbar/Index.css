@@ -1,0 +1,38 @@
+.placeholder::placeholder {
+  color: #cbd5e0; /* Assuming #cbd5e0 is the hex value for gray-400 */
+}
+
+.search-input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: none;
+  padding: 0.5rem;
+}
+
+.search-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.search-input-field {
+  width: 900px;
+  font-size: 0.875rem;
+  padding-left: 30px;
+  border: none;
+  outline: none;
+}
+
+/* Adjust the icon size and color */
+.search-input-container svg {
+  fill: #1a202c;
+  width: 20px;
+  height: 20px;
+}
