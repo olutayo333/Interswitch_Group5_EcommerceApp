@@ -1,0 +1,48 @@
+.title {
+  background-color: #ffffff;
+  padding: 0.5rem 1rem;
+  display: grid;
+
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  border-width: 2px;
+  border-color: #dc2626;
+  color: #dc2626;
+  background-color: transparent;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  transition-property: background-color, color; /* Apply transition to background-color and color */
+  transition-duration: 0.3s;
+  margin-right: 20px;
+}
+
+button:hover {
+  background-color: #dc2626;
+  color: #fff;
+}
+
+.products {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  gap: 1.25rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  height: calc(100vh - 190px);
+  overflow-y: scroll;
+}
+
+.products-display {
+  position: inherit;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  height: calc(100vh - 190px);
+  overflow-y: scroll;
+}

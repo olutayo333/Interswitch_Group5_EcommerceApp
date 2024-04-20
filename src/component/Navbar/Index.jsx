@@ -18,8 +18,7 @@ const Navbar = () => {
         <Bars />
         <NavMenu>
           <NavLink to="/store">Store</NavLink>
-          <NavLink to="/about">About</NavLink>
-          <NavLink to="/feedback">Feedback</NavLink>
+          <NavLink to="/seller-profile">Profile</NavLink>
 
           {/* <div>
             <div style={{ position: "relative" }}>
