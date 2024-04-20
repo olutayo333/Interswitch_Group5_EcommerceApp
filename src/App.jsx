@@ -17,6 +17,9 @@ import Toys from './components/categories/Toys'
 import Footer from './components/Footer'
 import Search from './components/Search'
 
+import Feedback from './pages/Feedback'
+import About from './pages/About'
+import Store from './pages/Store'
 function App() {
   return (
     <> 
@@ -37,6 +40,11 @@ function App() {
       <Route path='sports' element={<Sports/>} />
       <Route path='toys' element={<Toys/>} />
       <Route path='search' element={<Search/>} />
+      
+      <Route path="/store" element={<Store />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/feedback" element={<Feedback />} />
+
       </Routes>
       <Footer/>
     </BrowserRouter>

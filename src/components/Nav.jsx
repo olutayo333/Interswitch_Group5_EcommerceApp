@@ -1,4 +1,7 @@
-import React, { useState } from 'react'
+import axios from 'axios'
+import Carousel from 'react-bootstrap/Carousel';
+import React, { useEffect, useState } from 'react'
+import {useSelector} from 'react-redux'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal'; import Spinner from 'react-bootstrap/Spinner';
 import { MdLocalShipping } from 'react-icons/md'
@@ -9,17 +12,31 @@ import { FiLogIn } from 'react-icons/fi'
 import { CiLogout, CiUser } from 'react-icons/ci'
 import { FaCartPlus } from "react-icons/fa6";
 import { Link, useNavigate } from 'react-router-dom';
+import BusinessandIndustrial from './categories/BusinessandIndustrial';
+import profileIMG from "../assets/images/Ellipse 1.png"
+import banner1 from "../assets/images/Frame 30.png"; import banner2 from "../assets/images/two.jpg"; import banner3 from "../assets/images/three.jpg"
+
+
 
 const Nav = () => {
+  let signinURL = "http://localhost:7001/user/signin"; let signupURL = "http://localhost:7001/user/signup"; let dashboardURL = "http://localhost:7001/user/dashboard";
+  let oldCart;
+  oldCart= JSON.parse(localStorage.getItem("productDetail1")) 
+  
+  let allData = useSelector((state)=>state.counterReducer); const [count, setcount]=useState(0)
+  console.log(allData); 
   const Navigate = useNavigate();
   const [show, setShow] = useState(false); const handleClose = () => setShow(false); const handleShow = () => setShow(true);
   const [show2, setShow2] = useState(false); const handleClose2 = () => setShow2(false); const handleShow2 = () => setShow2(true);
   const [showCart, setShowCart] = useState(false); const handleCloseCart = () => setShowCart(false); const handleShowCart = () => setShowCart(true);
-  const [showShippingForm, setshowShippingForm] = useState(false); const handleCloseShippingForm = () => setshowShippingForm(false); const handleShowShippingForm = () => {setshowShippingForm(true); setShowCart(false) }
+  const [showShippingForm, setshowShippingForm] = useState(false); const handleCloseShippingForm = () => setshowShippingForm(false); 
+  const handleShowShippingForm = () => {
+    if(username) { setshowShippingForm(true); setShowCart(false);}
+    else if(!username) {login()}  }
   
   const [username, setusername] = useState("")
   const[useremail, setuseremail] = useState("")
-  const[signinemail, setsigninemail] = useState("")
+  const[signinemail, setsigninemail] = useState(""); const[signinpassword, setsigninpassword]=useState("")
 
   const [name, setname] = useState(""); const[phonenumber, setphonenumber]= useState(""); const [registeremail, setregisteremail] = useState (""); 
   const [address, setaddress] = useState (""); const [password, setpassword] = useState(""); 
@@ -33,35 +50,65 @@ const Nav = () => {
   const [status, setstatus] = useState(false)
   const [buyer, setbuyer] = useState(true); const [buyerregistration, setbuyerregistration] = useState(true)
 
+  useEffect(()=>{
+    axios.get(dashboardURL,{ headers: { "Authorization": `Bearer ${token}`,  "Content-Type": "application/json", "Accept": "application/json" } })
+    .then((response)=>{
+        if(!response.data.status){setusername(""); setuseremail(""), setphonenumber(""); setaddress(""); setstatus(false); }
+        else if (response.data.status){
+            console.log(response);
+            setuseremail(response.data.user.email); setname(response.data.user.name); setstatus(true);
+            setphonenumber(response.data.user.phonenumber); setbalance(response.data.user.balance)
+        }
+    })
+}, [])
+let token = localStorage.token;
+
+  useEffect(()=>{
+    oldCart= JSON.parse(localStorage.getItem("productDetail1"));
+    if (oldCart){ setcount(oldCart.length); }
+    else{setcount(0)}
+  }, [])
   const deleteCart =(index) =>{
-    let newallTodo = [...cart]  //passing the data of alltodo to todo
-    newcart.splice(index,1)
-    setcart(newcart)
+    //let newallTodo = [...cart]  //passing the data of alltodo to todo
+    oldCart.splice(index,1)
+    localStorage.setItem('productDetail1', JSON.stringify(oldCart)); handleCloseCart();
+    alert("Deleted Successfully"); 
+    window.location.reload()
+    //handleCloseCart();
+    //setcart(newcart)
   }
- // const addTodo=()=>{ setcart([...cart, newcart]) }
   
- const login = () => {
-    setstatus(true)
-     setShow(true); setShow2(false) 
+ const login = () => { setShow(true); setShow2(false) }
+
+  const confirmlogin = ()=>{
+    setizloading(true)
+        axios.post (signinURL,{email:signinemail, password:signinpassword})
+        .then((response)=>{
+        if(!response.data.status){alert(response.data.message);}
+        else{   alert("Login successful"); console.log(response);
+              setstatus(true); setusername(response.data.user.name); 
+              setuseremail(response.data.user.email); setaddress(response.data.address);
+              setphonenumber(response.data.phonenumber); 
+              setizloading(false);  handleClose(); 
+            }
+        })
   }
 
-  const logout= ()=>{
-    setstatus(false) 
-  } 
-  const register=()=>{
-     setShow2(true); setShow(false)
-  }
+  const logout= ()=>{ setstatus(false); setname(""); setusername(""); setaddress(""); setphonenumber(""); setpassword("") } 
+  const register=()=>{     setShow2(true); setShow(false)}
+
+  const sellerregister =()=>{}
+  const sellerlogin =()=>{Navigate("/store")}
 
   const confirmsignup = () => {
     setizloading(true)
-    alert(name, registeremail, phonenumber, address, password)
     console.log(name, registeremail, phonenumber, address, password);
-    // axios.post(url, {name, registeremail, password, phonenumber, address})
-    // .then((response)=>{console.log(response)
-    // if (response.data.status)
-    // {alert("HURRAY SignUp Successful"); Navigate("/signin"); setizloading(false); console.log(response.data.message);  }
-    // else{alert(response.data.message); setizloading(false)}
-    //    })
+    axios.post(signupURL, {name, email:registeremail, password, phonenumber, physicaladdress:address})
+    .then((response)=>{console.log(response)
+    if (response.data.status)
+    {alert("HURRAY SignUp Successful"); setname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername("")}
+    else{alert(response.data.message); setizloading(false)} handleClose2(); handleShow();
+       })
     }
 
   const handlenameChange =(e)=>
@@ -82,14 +129,15 @@ const Nav = () => {
       setpassword(enteredpassword); 
       setvalidpassword(passwordRegExp.test(enteredpassword));
   }
+  
 
   return (
     <>
-      <div className='container w-100 header mx-0'>
+      <div className='container-fluid w-100 header mx-0'>
         <div className='row mx-auto'>
 
           <div className='row mx-auto d-flex nav-1 '>
-          <div className='col-10 d-flex mx-auto '  >
+          <div className='col-8 d-flex mx-auto nav-1-inner '  >
             <li className="mx-3"> <Link className='text-dark' style={{textDecoration:"none"}} to="/">Plus</Link> </li>
             <li className="mx-3"> <Link className='text-dark' style={{textDecoration:"none"}} to="/">Deals</Link> </li>                
             <li className="mx-3"> <Link className='text-dark' style={{textDecoration:"none"}} to="/">Find a Store</Link> </li>
@@ -97,21 +145,30 @@ const Nav = () => {
             
             <li className="ms-5 "> <Link className='text-dark' style={{textDecoration:"none"}} to="/">Become a Seller</Link> </li>
             <li className="mx-3"> <Link className='text-dark' style={{textDecoration:"none"}} to="/">Deals</Link> </li>                
-            <li className="mx-3"> <Link className='text-dark' style={{textDecoration:"none"}} to="/">Find a Store</Link> </li>
+            <li className="mx-3 me-5"> <Link className='text-dark' style={{textDecoration:"none"}} to="/">Find a Store</Link> </li>
           </div>
-          <div className='col-2 justify-content-end '>
+          <div className='col-1 justify-content-end'>
+              <li style={{zIndex:1}} className="nav-item dropdown ms-5 px-0" >
+                  <p className="nav-link dropdown-toggle " role="button" data-bs-toggle="dropdown" aria-expanded="false"> <img src={profileIMG} alt="" /> </p>
+                      <ul className="dropdown-menu border-0 shadow-sm" style={{zIndex:1}}>
+                          <li className='py-0'><button onClick={login} className="dropdown-item">Merchant </button> </li>
+                          <li className='py-0'><button onClick={login} className="dropdown-item">Customer </button> </li>
+                      </ul>
+              </li>
+            </div>
+          <div className='col-3 justify-content-end d-flex'>
           {
                !status ?
                 <div className='user'>
                     <div className='info'>
-                    <button className='ms-2 me-0' onClick={()=>setShowCart(true)}> <FaCartPlus /> Cart </button> <sup style={{color:"blue"}}> {cartNo}</sup>
+                    <button className='ms-2 me-0' onClick={()=>setShowCart(true)}> <FaCartPlus /> Cart </button> <sup style={{color:"blue"}}> <b>{count}</b></sup>
                       <button className='mx-3' onClick={login}> <CiUser/> Login </button>
                     </div>
-                 
                 </div> :
                 <div className='user'>
                   <div className='info'>
-                    <button className='ms-2 me-0' onClick={()=>setShowCart(true)}> <FaCartPlus /> Cart </button> <sup style={{color:"blue"}}> {cartNo}</sup>
+                    {username}
+                    <button className='ms-2 me-0' onClick={()=>setShowCart(true)}> <FaCartPlus /> Cart </button> <sup style={{color:"blue"}}> <b>{count}</b></sup>
                       <button className='mx-3' onClick={logout}> <CiUser/> Logout </button>
                     </div>
                 </div>
@@ -142,7 +199,7 @@ const Nav = () => {
                           </ul>
                 </div>
             <div className='col-10 search_box ' > 
-            <input type="text" placeholder='search for anything' />  <button onClick={()=>Navigate("/search")} className='btn btn-primary'>Search </button> <button className='btn btn-tertiary'>Advanced</button>
+            <input type="text" style={{width:"60vw"}} placeholder='search for anything' />  <button onClick={()=>Navigate("/search")} className='btn btn-primary'>Search </button> <button className='btn btn-tertiary'>Advanced</button>
             </div>
         </div> <hr />
 
@@ -167,14 +224,14 @@ const Nav = () => {
           <li className="nav-item"> <Link className="nav-link" to="/healthandbeauty">Health&Beauty</Link> </li>
           <li className="nav-item"> <Link className="nav-link" to="/toys">Toys</Link> </li>
           <li className="nav-item"> <Link className="nav-link" to="/businessandindustrial">Business & Industrial</Link> </li>
-          <li className="nav-item"> <Link className="nav-link" to="/Collectables">Collectables</Link> </li>
+          <li className="nav-item"> <Link className="nav-link" to="/collectables">Collectables</Link> </li>
                            
           </ul>     
         </div>
         </div>
       </nav>
     </div>
-    {/* SIGN IN MODAL */}
+    {/* SIGNIN MODAL */}
     <Modal show={show} onHide={handleClose} size="md" aria-labelledby="contained-modal-title-vcenter" centered  style={{border:"1px solid red",letterSpacing:"0.2em" }} >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter" className='d-flex justify-content-center ms-5 mx-5 ' style={{color:"white", backgroundColor:"#192943", borderRadius:"5px", padding:"5px 20px 5px 20px",letterSpacing:"0.23em"}}> SIGNIN PORTAL....  </Modal.Title>
@@ -190,12 +247,14 @@ const Nav = () => {
           <h4 className='d-flex justify-content-center'>Buyer's Login </h4>
           <input type="email" name="email" className='form form-control my-2' placeholder='example@gmail.com' onChange={(e)=>setsigninemail(e.target.value)} />
           <input type="password" name='password' className='form form-control' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' onChange={(e)=>setsigninpassword(e.target.value)} /> <hr />
+          <button className='btn btn-outline-danger' onClick={confirmlogin}> Siginin </button>
           <p>Dont't have a Buyer Account Yet? <button className='btn btn-sm btn-outline-secondary' onClick={register}> Register Here</button> </p>
           </>:
           <>
           <h4 className='d-flex justify-content-center'>Sellers's Login</h4>
           <input type="email" name="email" className='form form-control my-2' placeholder='example@gmail.com' onChange={(e)=>setsigninemail(e.target.value)} />
           <input type="password" name='password' className='form form-control' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' onChange={(e)=>setsigninpassword(e.target.value)}/> <hr />
+          <button className='btn btn-outline-danger' onClick={sellerlogin}> Siginin </button>
           <p>Dont't have a Seller Account Yet?<button className='btn btn-sm btn-outline-secondary' onClick={register}> Register Here</button></p>
           </>
           }
@@ -269,7 +328,7 @@ const Nav = () => {
           
           {
               ! izloading ?
-              <><button onClick={confirmsignup} disabled={!validname || !validemail || !validpassword || !registeremail || !name || !password || !phonenumber} type='submit' id='submit' className="btn my-2 p-2 text-light w-100" style={{backgroundColor:"#192943"}}>Create Account</button></>:
+              <><button onClick={sellerregister} disabled={!validname || !validemail || !validpassword || !registeremail || !name || !password || !phonenumber} type='submit' id='submit' className="btn my-2 p-2 text-light w-100" style={{backgroundColor:"#192943"}}>Create Account</button></>:
               <><button disabled className="btn my-2 p-2 text-light w-100" style={{backgroundColor:"#192943"}}> <Spinner as="span" variant='white' animation="grow" size="sm" role="status" aria-hidden="true" /> Loading... </button></>
           }
           <p>Already have a seller account?  <button className='btn btn-sm btn-outline-secondary' onClick={login}>Login here</button></p>
@@ -286,28 +345,31 @@ const Nav = () => {
         <Modal.Body>
            <hr />
             {
-            cart.length==0?
+            !oldCart?
           <>
             <h3>Your Cart is Currently Empty</h3>
           </>:
           <>
-          <h3>Cart is not Empty</h3>
-          { 
-            // cart.map((each, index) => (
-            // <div key={index}>
-            //    <h1>{each.productName}</h1>
-            //    <h1>{index}</h1> 
-            //    <button onClick={()=>deleteCart(index)}>Delete</button> 
-            //   {/* <button onClick={()=>editCart(index)}>Edit</button> */}
-            // </div>
-            // ))
-            }
+          {
+          //  oldCart= JSON.parse(localStorage.getItem("productDetail1"))
+            oldCart.map((each, index) => (
+            <div className=" bg-white justify-center items-center ps-5 " key={index}>
+               <h5>{index+1} <span>{each.productName}</span></h5> 
+              <img className='w-25' src={each.productImg} alt="" /> <br />
+              <b>{each.productPrice}</b> <br />  
+               <button className='btn btn-sm btn-danger' onClick={()=>deleteCart(index)}>Delete</button> <hr />
+            </div>
+            ))
+          }
+          
           </>
           }
           </Modal.Body>
           <Modal.Footer> 
-            {/* <Button variant="secondary" onClick={handleCloseCart}> Close </Button>  */}
+            
           <button onClick={handleShowShippingForm} className='btn  btn-lg btn-outline-danger col-12' > Proceed To Checkout </button>
+          <button className='btn btn-outline-danger' onClick={handleCloseCart}> Close Cart</button>
+          
           </Modal.Footer>
       </Modal>
       
@@ -355,14 +417,38 @@ const Nav = () => {
       </Modal>
 
 
-    <div className='banner'>
-        <div className='contant'>
-              {/* <button> Shop Now</button> */}
+    <div className=''>
+        <div className=''>
+        <Carousel>
+          <Carousel.Item interval={1000}>
+            <img src={banner1} style={{borderRadius:"10px"}} alt=""  />
+            <Carousel.Caption>
+              <h3></h3>
+              <p></p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item interval={500}>
+          <img src={banner1} style={{borderRadius:"10px"}} alt="" text="Second Slide"  />
+            <Carousel.Caption>
+              <h3></h3>
+              <p></p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img src={banner1} alt="" text="Third Slide" />
+            <Carousel.Caption>
+              <h3></h3>
+              <p></p>
+            </Carousel.Caption>
+          </Carousel.Item>
+    </Carousel>
         </div>
     </div>
   </div>
    </div>   
+   
     </>
+    
   )
 }
 

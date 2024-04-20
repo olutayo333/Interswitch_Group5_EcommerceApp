@@ -4,6 +4,7 @@ import { BiLoaderCircle } from "react-icons/bi";
 import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
+
 export const Nav = styled.nav`
   background: #e9f3f6;
   height: 30px;
