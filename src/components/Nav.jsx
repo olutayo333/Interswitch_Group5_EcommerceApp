@@ -19,7 +19,7 @@ import banner1 from "../assets/images/Frame 30.png"; import banner2 from "../ass
 
 
 const Nav = () => {
-  let signinURL = "http://localhost:7001/user/signin"; let signupURL = "http://localhost:7001/user/signup"; let dashboardURL = "http://localhost:7001/user/dashboard";
+  let signinURL = "https://interswitchcustomersserver.onrender.com/user/signin"; let signupURL = "https://interswitchcustomersserver.onrender.com/user/signup"; let dashboardURL = "https://interswitchcustomersserver.onrender.com/user/dashboard";
   let oldCart;
   oldCart= JSON.parse(localStorage.getItem("productDetail1")) 
   
@@ -53,7 +53,7 @@ const Nav = () => {
   useEffect(()=>{
     axios.get(dashboardURL,{ headers: { "Authorization": `Bearer ${token}`,  "Content-Type": "application/json", "Accept": "application/json" } })
     .then((response)=>{
-        if(!response.data.status){setusername(""); setuseremail(""), setphonenumber(""); setaddress(""); setstatus(false); }
+        if(!response.data.status){setusername(""); setuseremail(""), setphonenumber(""); setaddress(""); setstatus(false); localStorage.removeItem('productDetail1') }
         else if (response.data.status){
             console.log(response);
             setuseremail(response.data.user.email); setname(response.data.user.name); setstatus(true);
@@ -86,6 +86,7 @@ let token = localStorage.token;
         .then((response)=>{
         if(!response.data.status){alert(response.data.message);}
         else{   alert("Login successful"); console.log(response);
+                localStorage.token = response.data.token
               setstatus(true); setusername(response.data.user.name); 
               setuseremail(response.data.user.email); setaddress(response.data.address);
               setphonenumber(response.data.phonenumber); 
@@ -94,7 +95,7 @@ let token = localStorage.token;
         })
   }
 
-  const logout= ()=>{ setstatus(false); setname(""); setusername(""); setaddress(""); setphonenumber(""); setpassword("") } 
+  const logout= ()=>{ setstatus(false); setname(""); setusername(""); setaddress(""); setphonenumber(""); setpassword(""); localStorage.removeItem('productDetail1') } 
   const register=()=>{     setShow2(true); setShow(false)}
 
   const sellerregister =()=>{}
