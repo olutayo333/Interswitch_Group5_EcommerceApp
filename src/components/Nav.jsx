@@ -457,15 +457,15 @@ let token = localStorage.token;
               <p></p>
             </Carousel.Caption>
           </Carousel.Item>
-          <Carousel.Item>
-            <img src={banner3} alt="" text="Third Slide" />
+          {/* <Carousel.Item>
+            <img src={banner3} style={{borderRadius:"10px"}} alt="" text="Third Slide" />
             <Carousel.Caption>
               <h3></h3>
               <p></p>
             </Carousel.Caption>
-          </Carousel.Item>
+          </Carousel.Item> */}
           <Carousel.Item>
-            <img src={banner4} alt="" text="Fourth Slide" />
+            <img src={banner4} style={{borderRadius:"10px"}} alt="" text="Fourth Slide" />
             <Carousel.Caption>
               <h3></h3>
               <p></p>
