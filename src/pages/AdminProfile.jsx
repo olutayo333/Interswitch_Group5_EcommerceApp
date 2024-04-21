@@ -29,6 +29,12 @@ const AdminProfile = () => {
         <div>
           <nav className="user-nav">
             <Link
+              to="/seller-profile/add-category"
+              className="user-nav-display"
+            >
+              Add new Category
+            </Link>
+            <Link
               to="/seller-profile/all-categories"
               className="user-nav-display"
             >

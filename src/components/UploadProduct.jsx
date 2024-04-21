@@ -1,142 +1,145 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { CgClose } from "react-icons/cg";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import productCategory from "../common/productCategory";
 import uploadImage from "../common/uploadImage";
 import DisplayImage from "../common/displayImage";
 import { MdDelete } from "react-icons/md";
+import SummaryApi from "../common";
 import "./UploadProduct.css";
 
 const UploadProduct = ({ onClose }) => {
-  const [data, setData] = useState({
-    productName: "",
-    brandName: "",
-    category: "",
-    productImage: [],
-    description: "",
-    price: "",
-    sellingPrice: "",
-  });
+  // const [data, setData] = useState({
+  //   productName: "",
+  //   brandName: "",
+  //   category: "",
+  //   productImage: [],
+  //   description: "",
+  //   price: "",
+  //   sellingPrice: "",
+  // });
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [productName, setProductName] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [batchNumber, setBatchNumber] = useState("");
+  const [dateSold, setDateSold] = useState("");
+  const [pricePerUnit, setPricePerUnit] = useState("");
+  const [description, setDescription] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  // const [data, setData] = useState([]);
   const [openFullScreenImage, setOpenFullScreenImage] = useState(false);
   const [fullScreenImage, setFullScreenImage] = useState("");
 
-  const handleOnChange = (e) => {
-    const { name, value } = e.target;
+  useEffect(() => {
+    // Fetch categories from the backend API when the component mounts
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(SummaryApi.fetchCategory.url);
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+    fetchCategories();
+  }, []);
 
-    setData((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
-  };
+  // const handleUploadProductImage = async (e) => {
+  //   const file = e.target.files[0];
+  //   const uploadImageCloudinary = await uploadImage(file);
+  //   console.log("upload image", uploadImageCloudinary);
 
-  const handleUploadProduct = async (e) => {
-    const file = e.target.files[0];
-    const uploadImageCloudinary = await uploadImage(file);
-    console.log("upload image", uploadImageCloudinary);
+  //   setData((prev) => {
+  //     return {
+  //       ...prev,
+  //       productImage: [...prev.productImage, uploadImageCloudinary.url],
+  //     };
+  //   });
+  // };
 
-    setData((prev) => {
-      return {
-        ...prev,
-        productImage: [...prev.productImage, uploadImageCloudinary.url],
-      };
-    });
-  };
+  // const handleDeleteProductImage = async (index) => {
+  //   console.log("image index", index);
 
-  const handleDeleteProductImage = async (index) => {
-    console.log("image index", index);
+  //   const newProductImage = [...data.productImage];
+  //   newProductImage.splice(index, 1);
 
-    const newProductImage = [...data.productImage];
-    newProductImage.splice(index, 1);
-
-    setData((prev) => {
-      return {
-        ...prev,
-        productImage: [...newProductImage],
-      };
-    });
-  };
+  //   setData((prev) => {
+  //     return {
+  //       ...prev,
+  //       productImage: [...newProductImage],
+  //     };
+  //   });
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // const response = await fetch(SummaryApi.uploadProduct.url, {
-    //   method: SummaryApi.uploadProduct.method,
-    //   credentials: "include",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(data),
-    // });
+    const newProduct = {
+      category: selectedCategory,
+      name: productName,
+      quantity,
+      batchNumber,
+      dateSold,
+      pricePerUnit,
+      description,
+    };
 
-    // const responseData = await response.json();
-
-    // if (responseData.success) {
-    //   toast.success(responseData?.message);
-    //   onClose();
-    //   fetchData();
-    // }
-
-    // if (responseData.error) {
-    //   toast.error(responseData?.message);
-    // }
+    try {
+      const response = await axios.post(SummaryApi.addProduct.url, newProduct);
+      setSuccessMessage("Product created successfully!");
+      setErrorMessage("");
+    } catch (error) {
+      setErrorMessage("Error creating product. Please try again.");
+      setSuccessMessage("");
+    }
   };
   return (
     <div className="product-container">
       <div className="product">
         <div className="title">
-          <h2 style={{ fontWeight: "bold" }}>Upload Product</h2>
+          <h2 style={{ fontWeight: "bold" }}>Welcome, Create a New Product</h2>
           <div className="icon" onClick={onClose}>
             <CgClose />
           </div>
         </div>
+
+        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+        {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
+
         <form className="form" onSubmit={handleSubmit}>
+          <label htmlFor="category" style={{ marginTop: "0.75rem" }}>
+            Category :
+          </label>
+          <select
+            required
+            value={selectedCategory}
+            id="category"
+            onChange={(e) => setSelectedCategory(e.target.value)}
+            className="form-input"
+          >
+            <option value={""}>Select Category</option>
+            {categories.map((category) => {
+              return (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              );
+            })}
+          </select>
+
           <label htmlFor="productName">Product Name :</label>
           <input
             type="text"
             id="productName"
             placeholder="enter product name"
             name="productName"
-            value={data.productName}
-            onChange={handleOnChange}
+            value={productName}
+            onChange={(e) => setProductName(e.target.value)}
             className="form-input"
             required
           />
-
-          <label htmlFor="brandName" style={{ marginTop: "0.75rem" }}>
-            Brand Name :
-          </label>
-          <input
-            type="text"
-            id="brandName"
-            placeholder="enter brand name"
-            value={data.brandName}
-            name="brandName"
-            onChange={handleOnChange}
-            className="form-input"
-            required
-          />
-
-          <label htmlFor="category" style={{ marginTop: "0.75rem" }}>
-            Category :
-          </label>
-          <select
-            required
-            value={data.category}
-            name="category"
-            onChange={handleOnChange}
-            className="form-input"
-          >
-            <option value={""}>Select Category</option>
-            {productCategory.map((el, index) => {
-              return (
-                <option value={el.value} key={el.value + index}>
-                  {el.label}
-                </option>
-              );
-            })}
-          </select>
-
+          {/* 
           <label htmlFor="productImage" style={{ marginTop: "0.75rem" }}>
             Product Image :
           </label>
@@ -151,7 +154,7 @@ const UploadProduct = ({ onClose }) => {
                   type="file"
                   id="uploadImageInput"
                   className="hidden"
-                  onChange={handleUploadProduct}
+                  onChange={handleUploadProductImage}
                 />
               </div>
             </div>
@@ -194,33 +197,41 @@ const UploadProduct = ({ onClose }) => {
                 *Please upload product image
               </p>
             )}
-          </div>
+          </div> */}
 
-          <label htmlFor="price" style={{ marginTop: "0.75rem" }}>
-            Price :
-          </label>
+          <label htmlFor="quantity">Quantity:</label>
           <input
             type="number"
-            id="price"
-            placeholder="enter price"
-            value={data.price}
-            name="price"
-            onChange={handleOnChange}
-            className="form-input"
+            id="quantity"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
             required
           />
 
-          <label htmlFor="sellingPrice" style={{ marginTop: "0.75rem" }}>
-            Selling Price :
-          </label>
+          <label htmlFor="batchNumber">Batch Number:</label>
+          <input
+            type="text"
+            id="batchNumber"
+            value={batchNumber}
+            onChange={(e) => setBatchNumber(e.target.value)}
+            required
+          />
+
+          <label htmlFor="dateSold">Date Sold:</label>
+          <input
+            type="date"
+            id="dateSold"
+            value={dateSold}
+            onChange={(e) => setDateSold(e.target.value)}
+            required
+          />
+
+          <label htmlFor="pricePerUnit">Price Per Unit:</label>
           <input
             type="number"
-            id="sellingPrice"
-            placeholder="enter selling price"
-            value={data.sellingPrice}
-            name="sellingPrice"
-            onChange={handleOnChange}
-            className="form-input"
+            id="pricePerUnit"
+            value={pricePerUnit}
+            onChange={(e) => setPricePerUnit(e.target.value)}
             required
           />
 
@@ -228,15 +239,17 @@ const UploadProduct = ({ onClose }) => {
             Description :
           </label>
           <textarea
+            id="description"
             className="textarea"
             placeholder="enter product description"
             rows={3}
-            onChange={handleOnChange}
-            name="description"
-            value={data.description}
-          ></textarea>
+            onChange={(e) => setDescription(e.target.value)}
+            value={description}
+          />
 
-          <button className="upload-button">Upload Product</button>
+          <button className="upload-button" type="submit">
+            Create Product
+          </button>
         </form>
       </div>
       {openFullScreenImage && (

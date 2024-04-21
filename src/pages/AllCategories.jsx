@@ -1,8 +1,8 @@
 import React from "react";
-import CategoryList from "../components/CategoryList";
+import TransactionList from "../components/TransactionData";
 
 const AllCategories = () => {
-  return <CategoryList />;
+  return <TransactionList />;
 };
 
 export default AllCategories;
