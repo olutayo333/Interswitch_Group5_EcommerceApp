@@ -14,11 +14,10 @@ import { FaCartPlus } from "react-icons/fa6";
 import { Link, useNavigate } from 'react-router-dom';
 import BusinessandIndustrial from './categories/BusinessandIndustrial';
 import profileIMG from "../assets/images/Ellipse 1.png"
-import banner1 from "../assets/images/Frame 30.png"; import banner2 from "../assets/images/two.jpg"; import banner3 from "../assets/images/three.jpg"
-
-
+import banner1 from "../assets/images/Frame 30.png"; import banner2 from "../assets/images/IMG_2.png"; import banner3 from "../assets/images/IMG_1.jpg"; import banner4 from "../assets/images/IMG_3.jpg"
 
 const Nav = () => {
+  let merchantURL="http://localhost:8080"; let merchantSigninURL=`${merchantURL}/auth/login`; let merchantRegisterURL=`${merchantURL}/auth/register`; console.log(merchantRegisterURL, merchantSigninURL); 
   let signinURL = "https://interswitchcustomersserver.onrender.com/user/signin"; let signupURL = "https://interswitchcustomersserver.onrender.com/user/signup"; let dashboardURL = "https://interswitchcustomersserver.onrender.com/user/dashboard";
   let oldCart;
   oldCart= JSON.parse(localStorage.getItem("productDetail1")) 
@@ -39,13 +38,11 @@ const Nav = () => {
   const[signinemail, setsigninemail] = useState(""); const[signinpassword, setsigninpassword]=useState("")
 
   const [name, setname] = useState(""); const[phonenumber, setphonenumber]= useState(""); const [registeremail, setregisteremail] = useState (""); 
-  const [address, setaddress] = useState (""); const [password, setpassword] = useState(""); 
+  const [address, setaddress] = useState (""); const [password, setpassword] = useState(""); const[bussinessname, setbussinessname]=useState("")
+  const[firstname, setfirstname]= useState(''); const[lastname, setlastname]= useState("")
 
   const [validname, setvalidname] = useState(true); const [validemail, setvalidemail] = useState(true); const [validpassword, setvalidpassword] = useState(true); 
-  const [validphonenumber, setvalidphonenumber] = useState(true)
-  const [izloading, setizloading] = useState(false)
-
-  const[cartNo, setcartNo] = useState(0); const [cart, setcart]= useState([]);
+  const [izloading, setizloading] = useState(false); const [validfirstname, setvalidfirstname] = useState(true); const [validlastname, setvalidlastname] = useState(true);
 
   const [status, setstatus] = useState(false)
   const [buyer, setbuyer] = useState(true); const [buyerregistration, setbuyerregistration] = useState(true)
@@ -73,9 +70,7 @@ let token = localStorage.token;
     oldCart.splice(index,1)
     localStorage.setItem('productDetail1', JSON.stringify(oldCart)); handleCloseCart();
     alert("Deleted Successfully"); 
-    window.location.reload()
-    //handleCloseCart();
-    //setcart(newcart)
+    window.location.reload()    //handleCloseCart();
   }
   
  const login = () => { setShow(true); setShow2(false) }
@@ -98,12 +93,25 @@ let token = localStorage.token;
   const logout= ()=>{ setstatus(false); setname(""); setusername(""); setaddress(""); setphonenumber(""); setpassword(""); localStorage.removeItem('productDetail1') } 
   const register=()=>{     setShow2(true); setShow(false)}
 
-  const sellerregister =()=>{}
-  const sellerlogin =()=>{Navigate("/store")}
+  const sellerregister =()=>{
+    axios.post(merchantSigninURL, {firstname, lastname, email:registeremail, password, bussinessname})
+    .then((response)=>{console.log(response)
+    // if (response.data.status)
+    // {alert("HURRAY SignUp Successful"); setname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername("")}
+    // else{alert(response.data.message); setizloading(false)} handleClose2(); handleShow();
+       })
+  }
+  const sellerlogin =()=>{
+    axios.post(merchantRegisterURL, {email:signinemail, password:signinpassword})
+    .then((response)=>{console.log(response)
+    // if (response.data.status)
+    // {alert("HURRAY SignUp Successful"); Navigate("/seller-profile"); setname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername("")}
+    // else{alert(response.data.message); setizloading(false)} handleClose2(); handleShow();
+       })
+    }
 
   const confirmsignup = () => {
     setizloading(true)
-    console.log(name, registeremail, phonenumber, address, password);
     axios.post(signupURL, {name, email:registeremail, password, phonenumber, physicaladdress:address})
     .then((response)=>{console.log(response)
     if (response.data.status)
@@ -111,12 +119,24 @@ let token = localStorage.token;
     else{alert(response.data.message); setizloading(false)} handleClose2(); handleShow();
        })
     }
-
-  const handlenameChange =(e)=>
-       {    const nameRegEx = /^([a-zA-Z]{3,15})+([\s][a-zA-Z]{3,15})+$/  
+    //validemail || !validpassword || !registeremail || !name || !password || !phonenumber
+    const handlenameChange =(e)=>
+    {    const nameRegEx = /^([a-zA-Z]{3,15})+([\s][a-zA-Z]{3,15})+$/  
+         const enteredname = e.target.value; 
+         setname(enteredname); 
+         setvalidname(nameRegEx.test(enteredname)); 
+    }
+    const handlefirstnameChange =(e)=>
+       {    const nameRegEx = /^([a-zA-Z]{2,15})+$/  
             const enteredname = e.target.value; 
-            setname(enteredname); 
-            setvalidname(nameRegEx.test(enteredname)); 
+            setfirstname(enteredname); 
+            setvalidfirstname(nameRegEx.test(enteredname)); 
+       }
+       const handlelastnameChange =(e)=>
+       {    const nameRegEx = /^([a-zA-Z]{2,15})+$/  
+            const enteredname = e.target.value; 
+            setlastname(enteredname); 
+            setvalidlastname(nameRegEx.test(enteredname)); 
        }
   const handleEmailChange =(e)=>
   {    const emailRegex =/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
@@ -130,15 +150,14 @@ let token = localStorage.token;
       setpassword(enteredpassword); 
       setvalidpassword(passwordRegExp.test(enteredpassword));
   }
-  
 
   return (
     <>
       <div className='container-fluid w-100 header mx-0'>
         <div className='row mx-auto'>
 
-          <div className='row mx-auto d-flex nav-1 '>
-          <div className='col-8 d-flex mx-auto nav-1-inner '  >
+          <div className='row mx-auto d-flex nav-1 ' id='nav-1'>
+          <div className='col-8 d-flex mx-auto nav-1-inner' id='nav-1-inner'  >
             <li className="mx-3"> <Link className='text-dark' style={{textDecoration:"none"}} to="/">Plus</Link> </li>
             <li className="mx-3"> <Link className='text-dark' style={{textDecoration:"none"}} to="/">Deals</Link> </li>                
             <li className="mx-3"> <Link className='text-dark' style={{textDecoration:"none"}} to="/">Find a Store</Link> </li>
@@ -148,7 +167,7 @@ let token = localStorage.token;
             <li className="mx-3"> <Link className='text-dark' style={{textDecoration:"none"}} to="/">Deals</Link> </li>                
             <li className="mx-3 me-5"> <Link className='text-dark' style={{textDecoration:"none"}} to="/">Find a Store</Link> </li>
           </div>
-          <div className='col-1 justify-content-end'>
+          <div className='col-lg-1 col-6 justify-content-end' id='nav-2-inner'>
               <li style={{zIndex:1}} className="nav-item dropdown ms-5 px-0" >
                   <p className="nav-link dropdown-toggle " role="button" data-bs-toggle="dropdown" aria-expanded="false"> <img src={profileIMG} alt="" /> </p>
                       <ul className="dropdown-menu border-0 shadow-sm" style={{zIndex:1}}>
@@ -157,7 +176,7 @@ let token = localStorage.token;
                       </ul>
               </li>
             </div>
-          <div className='col-3 justify-content-end d-flex'>
+          <div className='col-lg-3 col-6 justify-content-end d-flex' id='nav-3-inner'>
           {
                !status ?
                 <div className='user'>
@@ -177,11 +196,11 @@ let token = localStorage.token;
           </div>
           </div> <hr />   
 
-        <div className='row mid_header mx-0'>
-            <div className='logo col-1 mx-0 my-0'> 
+        <div className='row mid_header mx-0'> 
+            <div className='logo col-1 mx-0 my-0' id='logoimg'> 
              <sup> <img className="img-fluid img-responsive mx-0 my-0" src={logo} alt="logo" /> </sup>
             </div>
-            <div className="col-1" style={{zIndex:1}} >
+            <div className="col-1" style={{zIndex:1}} id='menu' >
                         <ul className="dropdown-nav" style={{listStyleType:"none"}}>
                             <li style={{zIndex:1}} className="nav-item dropdown px-0" >
                                 <p className="nav-link dropdown-toggle " role="button" data-bs-toggle="dropdown" aria-expanded="false"> All </p>
@@ -199,8 +218,8 @@ let token = localStorage.token;
                             </li> 
                           </ul>
                 </div>
-            <div className='col-10 search_box ' > 
-            <input type="text" style={{width:"60vw"}} placeholder='search for anything' />  <button onClick={()=>Navigate("/search")} className='btn btn-primary'>Search </button> <button className='btn btn-tertiary'>Advanced</button>
+            <div className='col-10 search_box ' id='searchBar' > 
+            <input type="text" style={{width:"60vw"}} placeholder='search for anything' />  <button onClick={()=>Navigate("/search")} className='btn btn-primary'>Search </button> <button className='btn btn-tertiary' id='advancedbtn'>Advanced</button>
             </div>
         </div> <hr />
 
@@ -277,11 +296,10 @@ let token = localStorage.token;
             buyerregistration?
           <>
           <h4 className='d-flex justify-content-center'> <u>Buyer's Registration</u></h4>
-          
           <label htmlFor="full name" className='fw-bold' style={{color:"#4DC5DA"}} >Full Name:</label>
           <input type="text" className='form form-control' id='nameID'  placeholder='firstname&nbsp;&nbsp;lastname' onChange={handlenameChange} />
           {validname? null : <p><small className='text-danger'>Please enter a valid name</small></p> }
-
+          
           <label htmlFor="phone number" className='fw-bold mt-1' style={{color:"#4DC5DA"}} >Phone Number:</label>
           <input type="number" className='form form-control' placeholder='enter phone number'  name='phone' onChange={(e)=>{setphonenumber(e.target.value)}} />
           {/* {validphonenumber? null : <p><small className='text-danger'>Please enter a valid phonenumber</small></p>} */}
@@ -290,13 +308,13 @@ let token = localStorage.token;
           <input type="email" name="email" className='form form-control my-2' placeholder='example@gmail.com' onChange={handleEmailChange}  />
           {validemail? null : <p><small className='text-danger'>Please enter a valid email address</small></p>}
           
-          <label htmlFor=" address"  className='fw-bold mt-1' style={{color:"#4DC5DA"}} >Physical Address:</label>
-          <input type="text" name="address" className='form form-control my-2' placeholder='Enter your home or office address' onChange={(e)=>{setaddress(e.target.value)}} />
+          <label htmlFor=" address"  className='fw-bold mt-1' style={{color:"#4DC5DA"}} >Business Name:</label>
+          <input type="text" name="address" className='form form-control my-2' placeholder='Enter your bussiness name' onChange={(e)=>{setbussinessname(e.target.value)}} />
           {/* {validemail? null : <p><small className='text-danger'>Please enter a valid email address</small></p>} */}
 
           <label htmlFor="password" className='fw-bold mt-1 ' style={{color:"#4DC5DA"}} >Password:</label>
           <input type="password" name='password' className='form form-control my-2' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' onChange={handlePasswordChange} />
-          {validpassword? null : <p><small className='text-danger'>Enter a strong password</small></p>}
+          {validpassword? null : <p><small className='text-danger'>Enter a strong password (Aa!1) </small></p>}
           
           {
               ! izloading ?
@@ -307,9 +325,13 @@ let token = localStorage.token;
           </>:
           <>
           <h4 className='d-flex justify-content-center'><u>Seller's Registration</u></h4>
-          <label htmlFor="full name" className='fw-bold' style={{color:"#4DC5DA"}} >Full Name:</label>
-          <input type="text" className='form form-control' id='nameID'  placeholder='firstname&nbsp;&nbsp;lastname' onChange={handlenameChange} />
-          {validname? null : <p><small className='text-danger'>Please enter a valid name</small></p> }
+          <label htmlFor="full name" className='fw-bold' style={{color:"#4DC5DA"}} >First Name:</label>
+          <input type="text" className='form form-control' id='nameID'  placeholder='firstname&nbsp;&nbsp;' onChange={handlefirstnameChange} />
+          {validfirstname? null : <p><small className='text-danger'>Please enter a valid name</small></p> }
+
+          <label htmlFor="full name" className='fw-bold' style={{color:"#4DC5DA"}} >First Name:</label>
+          <input type="text" className='form form-control' id='nameID'  placeholder='lastname&nbsp;&nbsp;' onChange={handlelastnameChange} />
+          {validlastname? null : <p><small className='text-danger'>Please enter a valid name</small></p> }          
 
           <label htmlFor="phone number" className='fw-bold mt-1' style={{color:"#4DC5DA"}} >Phone Number:</label>
           <input type="number" className='form form-control' placeholder='enter phone number'  name='phone' onChange={(e)=>{setphonenumber(e.target.value)}} />
@@ -329,7 +351,7 @@ let token = localStorage.token;
           
           {
               ! izloading ?
-              <><button onClick={sellerregister} disabled={!validname || !validemail || !validpassword || !registeremail || !name || !password || !phonenumber} type='submit' id='submit' className="btn my-2 p-2 text-light w-100" style={{backgroundColor:"#192943"}}>Create Account</button></>:
+              <><button onClick={sellerregister} disabled={!validfirstname || !validfirstname|| !validemail || !validpassword || !registeremail || !name || !password || !phonenumber || !address} type='submit' id='submit' className="btn my-2 p-2 text-light w-100" style={{backgroundColor:"#192943"}}>Create Account</button></>:
               <><button disabled className="btn my-2 p-2 text-light w-100" style={{backgroundColor:"#192943"}}> <Spinner as="span" variant='white' animation="grow" size="sm" role="status" aria-hidden="true" /> Loading... </button></>
           }
           <p>Already have a seller account?  <button className='btn btn-sm btn-outline-secondary' onClick={login}>Login here</button></p>
@@ -411,7 +433,7 @@ let token = localStorage.token;
           <Modal.Footer> 
            {
               ! izloading ?
-              <><button  className='btn  btn-lg btn-outline-danger col-12' disabled={cart.length==0 }> Proceed To Make Payment </button></>:
+              <><button  className='btn  btn-lg btn-outline-danger col-12' disabled={!oldCart}> Proceed To Make Payment </button></>:
               <><button disabled className="btn my-2 p-2 text-light w-100" style={{backgroundColor:"#192943"}}> <Spinner as="span" variant='white' animation="grow" size="sm" role="status" aria-hidden="true" /> Loading... </button></>
           }
           </Modal.Footer>
@@ -419,24 +441,31 @@ let token = localStorage.token;
 
 
     <div className=''>
-        <div className=''>
-        <Carousel>
+        <div className='' id='caro'>
+        <Carousel id='caro1'>
           <Carousel.Item interval={1000}>
-            <img src={banner1} style={{borderRadius:"10px"}} alt=""  />
+            <img src={banner1} id='img1' style={{borderRadius:"10px"}} alt=""  />
             <Carousel.Caption>
               <h3></h3>
               <p></p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item interval={500}>
-          <img src={banner1} style={{borderRadius:"10px"}} alt="" text="Second Slide"  />
+          <img src={banner2} style={{borderRadius:"10px"}} alt="" text="Second Slide"  />
             <Carousel.Caption>
               <h3></h3>
               <p></p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img src={banner1} alt="" text="Third Slide" />
+            <img src={banner3} alt="" text="Third Slide" />
+            <Carousel.Caption>
+              <h3></h3>
+              <p></p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img src={banner4} alt="" text="Fourth Slide" />
             <Carousel.Caption>
               <h3></h3>
               <p></p>

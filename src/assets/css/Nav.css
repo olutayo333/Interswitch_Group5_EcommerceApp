@@ -142,12 +142,22 @@ z-index: 1;  border-radius: 5px;
 
 /* ========== only mobile view ============ */
 @media all and (max-width:475px) {
-    #imagescammer {
+    .header .nav-1 li{display: none;}
+   #nav-2-inner{display:none}
+   .header .nav-1{margin-top: 10vh; width: auto};
+   #nav-3-inner{display: none;}
+   #logoimg{display: none;}
+   #searchBar{width: auto; padding: 0px 0px 0px 0px;}
+    #menu{width: 10vw;} ; 
+    #advancedbtn{display: none};
+    #caro{width: 10vw;}
+    #caro1{display:none; width: 100vw; size: 50%;} 
+   #imagescammer {
         display: none;
     }
 
     body {
-        /* overflow-x: hidden; */
+        overflow-x: hidden;
         /* border: 2px solid blue; */
     }
 

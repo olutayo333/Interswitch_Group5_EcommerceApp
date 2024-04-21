@@ -161,7 +161,7 @@ const Home = () => {
     <div className='container-fluid'>
       <Nav/> <hr /> <br />
       <h3 className='mt-1 mx-5'> <b>Recently Viewed</b></h3>
-      <div className='row mx-5'>
+      <div className='row mx-lg-5 mx-auto'>
             {       
               recentlyViewed.map((items, index) => ( 
               <div  className="col-lg-2 col-md-3 col-12 rounded bg-white justify-center items-center pt-2 shadow mx-3 my-2" key={items.id}>

@@ -58,7 +58,7 @@ const productDetail2=(items)=>{
     <div className='container-fluid'>
       <Nav/>
       {/* {cartItems.name} */}
-      <div className='row mx-5'>
+      <div className='row mx-lg-5 mx-auto'>
           <h2 className='mt-5'>Electronics</h2>
           {/* <div className=" grid lg:grid-col-6 md:grid-col-3 grid-col-2"> */}
             {
