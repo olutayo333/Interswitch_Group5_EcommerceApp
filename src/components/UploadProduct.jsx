@@ -12,15 +12,6 @@ import { useState, useEffect } from 'react';
 
 
 const UploadProduct = ({ onClose }) => {
-  // const [data, setData] = useState({
-  //   productName: "",
-  //   brandName: "",
-  //   category: "",
-  //   productImage: [],
-  //   description: "",
-  //   price: "",
-  //   sellingPrice: "",
-  // });
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [productName, setProductName] = useState("");
@@ -31,7 +22,7 @@ const UploadProduct = ({ onClose }) => {
   const [description, setDescription] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  // const [data, setData] = useState([]);
+  const [productImage, setProductImage] = useState([]);
   const [openFullScreenImage, setOpenFullScreenImage] = useState(false);
   const [fullScreenImage, setFullScreenImage] = useState("");
 
@@ -48,32 +39,32 @@ const UploadProduct = ({ onClose }) => {
     fetchCategories();
   }, []);
 
-  // const handleUploadProductImage = async (e) => {
-  //   const file = e.target.files[0];
-  //   const uploadImageCloudinary = await uploadImage(file);
-  //   console.log("upload image", uploadImageCloudinary);
+  const handleUploadProductImage = async (e) => {
+    const file = e.target.files[0];
+    const uploadImageCloudinary = await uploadImage(file);
+    console.log("upload image", uploadImageCloudinary);
 
-  //   setData((prev) => {
-  //     return {
-  //       ...prev,
-  //       productImage: [...prev.productImage, uploadImageCloudinary.url],
-  //     };
-  //   });
-  // };
+    setProductImage((prev) => {
+      return {
+        ...prev,
+        productImage: [...prev.productImage, uploadImageCloudinary.url],
+      };
+    });
+  };
 
-  // const handleDeleteProductImage = async (index) => {
-  //   console.log("image index", index);
+  const handleDeleteProductImage = async (index) => {
+    console.log("image index", index);
 
-  //   const newProductImage = [...data.productImage];
-  //   newProductImage.splice(index, 1);
+    const newProductImage = [...data.productImage];
+    newProductImage.splice(index, 1);
 
-  //   setData((prev) => {
-  //     return {
-  //       ...prev,
-  //       productImage: [...newProductImage],
-  //     };
-  //   });
-  // };
+    setData((prev) => {
+      return {
+        ...prev,
+        productImage: [...newProductImage],
+      };
+    });
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -141,7 +132,7 @@ const UploadProduct = ({ onClose }) => {
             className="form-input"
             required
           />
-          {/* 
+
           <label htmlFor="productImage" style={{ marginTop: "0.75rem" }}>
             Product Image :
           </label>
@@ -199,7 +190,7 @@ const UploadProduct = ({ onClose }) => {
                 *Please upload product image
               </p>
             )}
-          </div> */}
+          </div>
 
           <label htmlFor="quantity">Quantity:</label>
           <input
