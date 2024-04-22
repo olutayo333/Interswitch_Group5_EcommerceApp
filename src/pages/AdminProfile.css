@@ -1,0 +1,57 @@
+.admin {
+  min-height: calc(100vh - 120px);
+}
+
+.admin .admin-aside {
+  background-color: #e9f3f6;
+  min-height: 100%;
+  width: 100%;
+  max-width: 20rem;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  position: absolute;
+}
+.user {
+  /* height: 8rem; 32px */
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; */
+}
+
+.user-profile {
+  font-size: 3rem; /* Adjust the font size to match text-5xl (extra-large) */
+  cursor: pointer;
+  position: relative;
+  display: flex-start;
+  justify-content: center;
+}
+.user-profile-img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.user-name {
+  text-transform: capitalize;
+  font-size: 1.25rem; /* 20px assuming 16px base font size */
+  font-weight: 600;
+}
+.user-role {
+  font-size: small;
+}
+.user-nav {
+  display: grid;
+  padding: 3rem;
+}
+.user-nav-display {
+  padding: 0.5rem 1rem; text-decoration: none; letter-spacing: 3.5px; color: #192943; font-weight: 500;
+}
+.user-nav-display:hover {
+  background-color: #f4f5f7;
+}
+
+main {
+  display: flex;
+  position: relative;
+  justify-content: space-evenly;
+}

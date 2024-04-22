@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+//import './App.css'
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './components/Home'
-import Mod from './components/Mod'
+// import Mod from './components/Mod'
 import BusinessandIndustrial from './components/categories/BusinessandIndustrial'
 import Clothing from './components/categories/Clothing'
 import Collectables from './components/categories/Collectables'
@@ -14,21 +15,28 @@ import HomeandGarden from './components/categories/HomeandGarden'
 import Motors from './components/categories/Motors'
 import Sports from './components/categories/Sports'
 import Toys from './components/categories/Toys'
-import Footer from './components/Footer'
+// import Footer from './components/Footer'
 import Search from './components/Search'
 
-import Feedback from './pages/Feedback'
-import About from './pages/About'
-import Store from './pages/Store'
+ import Feedback from './pages/Feedback'
+ import About from './pages/About'
+ import Store from './pages/Store'
+// // import Layout from './pages/Layout'
+// //import Navbar from "../component/Navbar/Index";
+ import AdminProfile from "./pages/AdminProfile"; 
+ import CategoryForm from "./components/AddCategory"
+ import AllProducts from "./pages/AllProducts";
+  import AllCategories from "./pages/AllCategories"; 
+  
+
 function App() {
   return (
     <> 
-    {/* <Layout /> */}
+    {/* <Layout/> */}
     <BrowserRouter>
-    
       <Routes>
       <Route path='/' element={<Home/>}/>
-      <Route path="mod" element={<Mod/>} />
+      {/* <Route path="mod" element={<Mod/>} /> */}
       <Route path='home' element={<Home/>}/>
       <Route path='businessandindustrial' element={<BusinessandIndustrial/>}/>
       <Route path='clothing' element={<Clothing/>} />
@@ -41,16 +49,20 @@ function App() {
       <Route path='toys' element={<Toys/>} />
       <Route path='search' element={<Search/>} />
       
-      <Route path="/store" element={<Store />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/feedback" element={<Feedback />} />
-
+      <Route path="store" element={<Store />} />
+      <Route path="about" element={<About />} />
+      <Route path="feedback" element={<Feedback />} />
+      <Route path="seller-profile" element={<AdminProfile />}/>
+      <Route path="add-category" element={<CategoryForm />} />
+      <Route path="all-products" element={<AllProducts />} />
+      <Route path="all-categories" element={<AllCategories />} />
+    
       </Routes>
-      <Footer/>
+      {/* <Footer/> */}
     </BrowserRouter>
     
     </>
-  )
+  );
 }
 
 export default App;

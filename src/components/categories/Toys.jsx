@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Nav from '../Nav'
-import {useSelector, useDispatch} from 'react-redux'
-import { increament } from '../redux/counterSlice';
+// import {useSelector, useDispatch} from 'react-redux'
+// import { increament } from '../redux/counterSlice';
 import { GiSelfLove } from "react-icons/gi";
 import img1 from "./images/categorylink.png"; import img2 from "./images/cpap mask.png"
 import img3 from "./images/cpap supplies.png"; import img4 from "./images/humidifier.png";
@@ -18,8 +18,8 @@ const Toys = () => {
   const [showDetail, setshowDetail] = useState(false); const handleCloseDetail = () => setshowDetail(false); const handleshowDetail = () => setshowDetail(true);
   const[productName, setproductName] = useState(""); const [productPrice, setproductPrice]=useState(""); const[productDescription, setproductDescription]=useState("")
   const[productImg, setproductImg] = useState();
-  let dispatch = useDispatch()
-  let allData = useSelector((state)=>state.counterReducer); let count = useSelector((state)=>state.counterReducer.count); let cartItem = useSelector((state)=>state.counterReducer.cartItems)
+  // let dispatch = useDispatch()
+  // let allData = useSelector((state)=>state.counterReducer); let count = useSelector((state)=>state.counterReducer.count); let cartItem = useSelector((state)=>state.counterReducer.cartItems)
   let cartURL = ""
   console.log(allData); console.log(count); console.log(cartItem[0].name);
   

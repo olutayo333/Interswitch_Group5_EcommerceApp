@@ -1,0 +1,131 @@
+.product-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    156,
+    163,
+    175,
+    0.35
+  ); /* Slate-200 background color with 35% opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 100%;
+  max-width: 36rem;
+  height: 100%;
+  max-height: 80%;
+  overflow: hidden;
+}
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.75rem; /* Equivalent to pb-3 */
+}
+.icon {
+  width: fit-content;
+  margin-left: auto;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.icon:hover {
+  color: #dc2626;
+}
+
+.form {
+  display: grid;
+  /* grid-template-columns: repeat(
+    auto-fit,
+    minmax(0, 1fr)
+  ); Or any other desired grid template */
+  padding: 1rem; /* Equivalent to p-4 */
+  gap: 0.5rem; /* Equivalent to gap-2 */
+  overflow-y: scroll; /* Enable vertical scrolling */
+  height: 100%; /* Full height */
+  padding-bottom: 1.25rem; /* Equivalent to pb-5 */
+}
+
+.form-input {
+  padding: 0.5rem; /* Equivalent to p-2 */
+  background-color: #f4f5f7; /* Slate-100 background color */
+  border: 1px solid #d3d4d6; /* Border with color similar to Slate-100 */
+  border-radius: 0.25rem; /* Equivalent to rounded */
+}
+
+.input-image {
+  padding: 3rem; /* Equivalent to p-2 */
+  background-color: #f4f5f7; /* Slate-100 background color */
+  border: 1px solid #d3d4d6; /* Border with color similar to Slate-100 */
+  border-radius: 0.25rem;
+  height: 32px; /* Equivalent to h-32 */
+  width: 100%; /* Full width */
+  display: flex; /* Activate flexbox layout */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  cursor: pointer; /* Change cursor to pointer */
+}
+.image {
+  color: #6b7280; /* Slate-500 text color */
+  display: flex; /* Activate flexbox layout */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  flex-direction: column; /* Arrange items in a column */
+}
+/* selects any element that is a sibling of another element within  */
+.image > * + * {
+  margin-top: 0.2rem;
+}
+
+.product-image {
+  display: flex; /* Activate flexbox layout */
+  align-items: center; /* Center items vertically */
+}
+.product-image > * + * {
+  margin-left: 0.5rem;
+}
+
+.delete {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 0.25rem; /* Equivalent to p-1 */
+  color: #fff; /* White text color */
+  background-color: #dc2626; /* Red-600 background color */
+  border-radius: 9999px; /* Large border radius for rounded appearance */
+  /* visibility: hidden; */
+  cursor: pointer; /* Change cursor to pointer */
+}
+.delete:hover {
+  visibility: visible; /* Make visible on hover */
+}
+
+.textarea {
+  height: 7rem; /* Equivalent to h-28 */
+  background-color: #f4f5f7; /* Slate-100 background color */
+  border: 1px solid #d3d4d6; /* Border with color similar to Slate-100 */
+  resize: none; /* Disable resizing */
+  padding: 0.25rem; /* Equivalent to p-1 */
+}
+
+.upload-button {
+  padding: 0.75rem 1rem; /* Equivalent to px-3 py-2 */
+  background-color: #dc2626; /* Red-600 background color */
+  color: #fff; /* White text color */
+  margin-bottom: 2.5rem;
+}
+
+.upload-button:hover {
+  background-color: #c53030; /* Red-700 background color on hover */
+}

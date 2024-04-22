@@ -1,0 +1,34 @@
+.container1 {
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container1 .img-container {
+  background-color: #ffffff; /* White background color */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow with dimensions */
+  border-radius: 0.5rem; /* Rounded corners */
+  max-width: 80rem; /* Equivalent to max-w-5xl */
+  margin-left: auto; /* Center horizontally */
+  margin-right: auto; /* Center horizontally */
+  padding: 1rem;
+}
+.container1 .img-container .modal-container {
+  width: fit-content; /* Adjust width to content */
+  margin-left: auto; /* Move to the rightmost position */
+  font-size: 1.5rem; /* Equivalent to text-2xl */
+  cursor: pointer;
+}
+
+.img {
+  display: flex; /* Activate flexbox layout */
+  justify-content: center; /* Center horizontally */
+  padding: 1rem; /* Equivalent to p-4 */
+  max-width: 80vh; /* Maximum width of 80 viewport heights */
+  max-height: 80vh;
+}

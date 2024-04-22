@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import SummaryApi from "../common"; //import SummaryApi from "../common";
-//import "./AllProduct.css"; 
-//import "../pages/AllProducts.css"
+import SummaryApi from "../common";
+import "./AllProduct.css";
 import UploadProduct from "../components/UploadProduct"
-const Mod = () => {
+const AllProducts = () => {
   const [openUploadModal, setOpenUploadModal] = useState(false);
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState("");
@@ -115,4 +114,4 @@ const Mod = () => {
   );
 };
 
-export default Mod;
+export default AllProducts;

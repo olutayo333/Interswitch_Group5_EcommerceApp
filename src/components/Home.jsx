@@ -22,8 +22,7 @@ const Home = () => {
   
   const[productName, setproductName] = useState(""); const[productImg, setproductImg]= useState(""); 
   const[productPrice, setproductPrice]=useState(""); const[productDescription, setproductDescription]= useState("")
-  let allData = useSelector((state)=>state.counterReducer); let reduxcount = useSelector((state)=>state.counterReducer.count); let cartItem = useSelector((state)=>state.counterReducer.cartItems)
-  console.log(reduxcount);
+  //let allData = useSelector((state)=>state.counterReducer); let reduxcount = useSelector((state)=>state.counterReducer.count); let cartItem = useSelector((state)=>state.counterReducer.cartItems); console.log(reduxcount);
   //CART  
   const [showDetail, setshowDetail] = useState(false); const handleCloseDetail = () => setshowDetail(false); const handleshowDetail = () => setshowDetail(true);
 
