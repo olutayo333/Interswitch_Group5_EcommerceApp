@@ -17,7 +17,7 @@ import profileIMG from "../assets/images/Ellipse 1.png"
 import banner1 from "../assets/images/Frame 30.png"; import banner2 from "../assets/images/IMG_2.png"; import banner3 from "../assets/images/IMG_1.jpg"; import banner4 from "../assets/images/IMG_3.jpg"
 
 const Nav = () => { //https://8462-196-1-185-78.ngrok-free.app
-  let merchantURL="https://3197-41-76-82-123.ngrok-free.app"; let merchantSigninURL=`${merchantURL}/auth/login`; let merchantRegisterURL=`${merchantURL}/auth/register`; console.log(merchantRegisterURL, merchantSigninURL); 
+  let merchantURL="https://0437-41-76-82-123.ngrok-free.app"; let merchantSigninURL=`${merchantURL}/auth/login`; let merchantRegisterURL=`${merchantURL}/auth/register`; console.log(merchantRegisterURL, merchantSigninURL); 
   let signinURL = "https://interswitchcustomersserver.onrender.com/user/signin"; let signupURL = "https://interswitchcustomersserver.onrender.com/user/signup"; let dashboardURL = "https://interswitchcustomersserver.onrender.com/user/dashboard";
   let oldCart;
   oldCart= JSON.parse(localStorage.getItem("productDetail1")) 
@@ -80,7 +80,7 @@ let token = localStorage.token;
     setizloading(true)
         axios.post (signinURL,{email:signinemail, password:signinpassword})
         .then((response)=>{
-        if(response.data.status){alert(response.data.message);}
+        if(response.data.status){alert(response.data.message); setizloading(false)}
         else{   alert("Login successful"); console.log(response);
                 localStorage.token = response.data.token
               setstatus(true); setusername(response.data.user.name); 
@@ -100,7 +100,7 @@ let token = localStorage.token;
     axios.post(merchantRegisterURL, {firstname, lastname, email:registeremail, password, bussinessname})
     .then((response)=>{console.log(response)
     if (response.data=="Merchant registered successfully")
-    {alert(response.data); setfirstname(""); setlastname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername("")}
+    {alert(response.data); setfirstname(""); setlastname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername(""); setizloading(false)}
     else{alert(response.data); setizloading(false)} handleClose2(); handleShow();
        })
     .catch((err)=>{alert("Registration Failed, please try again later"); setizloading(false)})
@@ -109,9 +109,9 @@ let token = localStorage.token;
     setizloading(true) ; 
     axios.post(merchantSigninURL, {email:signinemail, password:signinpassword})
     .then((response)=>{console.log(response)
-    // if (response.data)
-    // {alert(response.data); Navigate("/seller-profile"); setname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername(""); setsigninemail(""); setsigninpassword("") }
-    // else{alert(response.data); setizloading(false)} handleClose2(); handleShow();
+     if (response.data)
+     {alert(response.data); Navigate("/seller-profile"); setname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername(""); setsigninemail(""); setsigninpassword("") }
+     else{alert(response.data); setizloading(false)} handleClose2(); handleShow();
        })
        .catch((err)=>{alert("Login Failed, please try again later"); setizloading(false); console.log(signinemail, signinpassword);})
     }
@@ -336,7 +336,7 @@ let token = localStorage.token;
           <input type="text" className='form form-control' id='nameID'  placeholder='firstname&nbsp;&nbsp;' onChange={handlefirstnameChange} />
           {validfirstname? null : <p><small className='text-danger'>Please enter a valid name</small></p> }
 
-          <label htmlFor="full name" className='fw-bold' style={{color:"#4DC5DA"}} >First Name:</label>
+          <label htmlFor="full name" className='fw-bold' style={{color:"#4DC5DA"}} >Last Name:</label>
           <input type="text" className='form form-control' id='nameID'  placeholder='lastname&nbsp;&nbsp;' onChange={handlelastnameChange} />
           {validlastname? null : <p><small className='text-danger'>Please enter a valid name</small></p> }          
 
