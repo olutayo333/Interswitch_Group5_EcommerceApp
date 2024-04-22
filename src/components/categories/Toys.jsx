@@ -12,7 +12,7 @@ import img9 from "./images/cpap supplies.png"; import img13 from "./images/humid
 import img10 from "./images/oxygen.png"; import img14 from "./images/categorylink.png";
 import img11 from "./images/oxygen.png";
 import Modal from 'react-bootstrap/Modal'; import Spinner from 'react-bootstrap/Spinner';
-
+import Footer from '../Footer';
 
 const Toys = () => {
   const [showDetail, setshowDetail] = useState(false); const handleCloseDetail = () => setshowDetail(false); const handleshowDetail = () => setshowDetail(true);
@@ -21,7 +21,7 @@ const Toys = () => {
   // let dispatch = useDispatch()
   // let allData = useSelector((state)=>state.counterReducer); let count = useSelector((state)=>state.counterReducer.count); let cartItem = useSelector((state)=>state.counterReducer.cartItems)
   let cartURL = ""
-  console.log(allData); console.log(count); console.log(cartItem[0].name);
+  // console.log(allData); console.log(count); console.log(cartItem[0].name);
   
   let allCart=[]; let oldCart=[]
   const addToCart = () => {
@@ -89,7 +89,7 @@ const productDetail2=(items)=>{
           </Modal.Footer>
       </Modal>
 
-
+    <Footer/>
     </div>
 
   )
