@@ -259,7 +259,7 @@ let token = localStorage.token;
         <Modal.Body>
           <div className=' row d-flex'>
             <div className='d-flex col-6 justify-content-start'> <button className='btn btn-lg col-12 btn-outline-primary' onClick={() => setbuyer(true)}> Buyer </button>  </div>
-            <div className='d-flex col-6 justify-content-end'> <button className='btn btn-lg col-12 btn-outline-info' onClick={() => setbuyer(false)}>Seller </button> </div>
+            <div className='d-flex col-6 justify-content-end'> <button className='btn btn-lg col-12 btn-outline-info' onClick={() => setbuyer(false)}>Merchant </button> </div>
           </div> <hr />
          {
             buyer?
@@ -271,7 +271,7 @@ let token = localStorage.token;
           <p>Dont't have a Buyer Account Yet? <button className='btn btn-sm btn-outline-secondary' onClick={register}> Register Here</button> </p>
           </>:
           <>
-          <h4 className='d-flex justify-content-center'>Sellers's Login</h4>
+          <h4 className='d-flex justify-content-center'>Merchant's Login</h4>
           <input type="email" name="email" className='form form-control my-2' placeholder='example@gmail.com' onChange={(e)=>setsigninemail(e.target.value)} />
           <input type="password" name='password' className='form form-control' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' onChange={(e)=>setsigninpassword(e.target.value)}/> <hr />
           <button className='btn btn-outline-danger' onClick={sellerlogin}> Siginin </button>
@@ -290,7 +290,7 @@ let token = localStorage.token;
         <Modal.Body>
           <div className=' row d-flex'>
             <div className='d-flex col-6 justify-content-start'> <button className='btn btn-lg col-12 btn-outline-primary' onClick={() => setbuyerregistration(true)}> Buyer </button>  </div>
-            <div className='d-flex col-6 justify-content-end'> <button className='btn btn-lg col-12 btn-outline-info' onClick={() => setbuyerregistration(false)}>Seller </button> </div>
+            <div className='d-flex col-6 justify-content-end'> <button className='btn btn-lg col-12 btn-outline-info' onClick={() => setbuyerregistration(false)}>Merchant </button> </div>
           </div> <hr />
             {
             buyerregistration?
@@ -324,7 +324,7 @@ let token = localStorage.token;
           <p>Already have a buyer account? <button className='btn btn-sm btn-outline-secondary' onClick={login}>Login here</button> </p>
           </>:
           <>
-          <h4 className='d-flex justify-content-center'><u>Seller's Registration</u></h4>
+          <h4 className='d-flex justify-content-center'><u>Merchant's Registration</u></h4>
           <label htmlFor="full name" className='fw-bold' style={{color:"#4DC5DA"}} >First Name:</label>
           <input type="text" className='form form-control' id='nameID'  placeholder='firstname&nbsp;&nbsp;' onChange={handlefirstnameChange} />
           {validfirstname? null : <p><small className='text-danger'>Please enter a valid name</small></p> }
