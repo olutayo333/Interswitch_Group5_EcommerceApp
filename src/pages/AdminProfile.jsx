@@ -2,18 +2,23 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { Link, Outlet } from "react-router-dom";
+import Navbar from "../component/Navbar/Index";
 
 import "./AdminProfile.css";
 
 const AdminProfile = () => {
   const user = useSelector((state) => state?.user?.user);
   return (
+    <>
+      <Navbar/>
+   
     <div className="container-fluid"> 
+    
       <div className="row">
     <div className="admin ">
       <aside className="admin-aside">
         <div className="user">
-          <div className="user-profile">
+          <div className="user-profile text-center "> 
             {user?.profilePic ? (
               <img
                 src={user?.profilePic}
@@ -32,21 +37,21 @@ const AdminProfile = () => {
           <nav className="user-nav">
             <Link
               to="/add-category"
-              className="user-nav-display"
+              className="user-nav-display fs-5" 
             >
-              Add new Category
+              <b> Add New Category </b>
             </Link> <hr />
             <Link
               to="/all-categories"
-              className="user-nav-display"
+              className="user-nav-display fs-5"
             >
-              All Categories
+              <b>All Categories</b>
             </Link> <hr />
             <Link
               to="/all-products"
-              className="user-nav-display"
+              className="user-nav-display fs-5"
             >
-              All products
+              <b>All products</b>
             </Link> <hr />
           </nav>
         </div>
@@ -54,10 +59,12 @@ const AdminProfile = () => {
 
       <main>
         <Outlet />
+        
       </main>
     </div>
   </div>
   </div>
+  </>
   );
 };
 

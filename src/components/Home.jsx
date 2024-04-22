@@ -3,6 +3,7 @@ import Nav from './Nav';
 import {useSelector, useDispatch} from 'react-redux'
 import { increament } from './redux/counterSlice';
 //import { increament } from '../redux/counterSlice';
+import Footer from './Footer';
 import { GiSelfLove } from "react-icons/gi";
 import { Link } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal'; import Spinner from 'react-bootstrap/Spinner';
@@ -239,6 +240,8 @@ const Home = () => {
             <button className='btn mx-auto w-75 btn-secondary' onClick={handleCloseDetail}> Close </button>
           </Modal.Footer>
       </Modal>
+
+      <Footer/>
     </div>
   )
 }

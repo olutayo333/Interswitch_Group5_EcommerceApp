@@ -96,17 +96,17 @@ let token = localStorage.token;
   const sellerregister =()=>{
     axios.post(merchantSigninURL, {firstname, lastname, email:registeremail, password, bussinessname})
     .then((response)=>{console.log(response)
-    // if (response.data.status)
-    // {alert("HURRAY SignUp Successful"); setname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername("")}
-    // else{alert(response.data.message); setizloading(false)} handleClose2(); handleShow();
+    if (response.data.status)
+    {alert("HURRAY SignUp Successful"); setname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername("")}
+    else{alert(response.data.message); setizloading(false)} handleClose2(); handleShow();
        })
   }
   const sellerlogin =()=>{
     axios.post(merchantRegisterURL, {email:signinemail, password:signinpassword})
     .then((response)=>{console.log(response)
-    // if (response.data.status)
-    // {alert("HURRAY SignUp Successful"); Navigate("/seller-profile"); setname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername("")}
-    // else{alert(response.data.message); setizloading(false)} handleClose2(); handleShow();
+    if (response.data.status)
+    {alert("HURRAY SignUp Successful"); Navigate("/seller-profile"); setname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername("")}
+    else{alert(response.data.message); setizloading(false)} handleClose2(); handleShow();
        })
     }
 

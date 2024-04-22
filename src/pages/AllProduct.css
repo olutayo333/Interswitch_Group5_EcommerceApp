@@ -46,3 +46,10 @@
   height: calc(100vh - 190px);
   overflow-y: scroll;
 }
+#mobileView{ display: none;}
+
+/* Mobile View Only */
+@media all and (max-width:475px) {
+  #mobileView{display:block}
+  #desctopView{display: none;}
+}

@@ -15,13 +15,13 @@ import HomeandGarden from './components/categories/HomeandGarden'
 import Motors from './components/categories/Motors'
 import Sports from './components/categories/Sports'
 import Toys from './components/categories/Toys'
-// import Footer from './components/Footer'
+import Footer from './components/Footer'
 import Search from './components/Search'
 
  import Feedback from './pages/Feedback'
  import About from './pages/About'
  import Store from './pages/Store'
-// // import Layout from './pages/Layout'
+ import Layout from './pages/Layout'
 // //import Navbar from "../component/Navbar/Index";
  import AdminProfile from "./pages/AdminProfile"; 
  import CategoryForm from "./components/AddCategory"

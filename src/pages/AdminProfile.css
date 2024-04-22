@@ -18,14 +18,14 @@
   flex-direction: column; */
 }
 
-.user-profile {
+.admin .user .user-profile {
   font-size: 3rem; /* Adjust the font size to match text-5xl (extra-large) */
   cursor: pointer;
   position: relative;
   display: flex-start;
   justify-content: center;
 }
-.user-profile-img {
+.admin .user .user-profile .user-profile-img {
   width: 20px;
   height: 20px;
   border-radius: 50%;

@@ -7,7 +7,8 @@ import uploadImage from "../common/uploadImage";
 import DisplayImage from "../common/displayImage";
 import { MdDelete } from "react-icons/md";
 import SummaryApi from "../common";
-import "./UploadProduct.css";
+import "./UploadProduct.css"; 
+import { useState, useEffect } from 'react'; 
 
 
 const UploadProduct = ({ onClose }) => {
