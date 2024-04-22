@@ -17,7 +17,7 @@ import profileIMG from "../assets/images/Ellipse 1.png"
 import banner1 from "../assets/images/Frame 30.png"; import banner2 from "../assets/images/IMG_2.png"; import banner3 from "../assets/images/IMG_1.jpg"; import banner4 from "../assets/images/IMG_3.jpg"
 
 const Nav = () => { //https://8462-196-1-185-78.ngrok-free.app
-  let merchantURL="https://43a9-41-76-82-123.ngrok-free.app"; let merchantSigninURL=`${merchantURL}/auth/login`; let merchantRegisterURL=`${merchantURL}/auth/register`; console.log(merchantRegisterURL, merchantSigninURL); 
+  let merchantURL="https://3197-41-76-82-123.ngrok-free.app"; let merchantSigninURL=`${merchantURL}/auth/login`; let merchantRegisterURL=`${merchantURL}/auth/register`; console.log(merchantRegisterURL, merchantSigninURL); 
   let signinURL = "https://interswitchcustomersserver.onrender.com/user/signin"; let signupURL = "https://interswitchcustomersserver.onrender.com/user/signup"; let dashboardURL = "https://interswitchcustomersserver.onrender.com/user/dashboard";
   let oldCart;
   oldCart= JSON.parse(localStorage.getItem("productDetail1")) 
@@ -88,26 +88,31 @@ let token = localStorage.token;
               setizloading(false);  handleClose(); 
             }
         })
+        .catch((err)=>{alert("Registration Failed, please try again later"); setizloading(false)})
   }
 
   const logout= ()=>{ setstatus(false); setname(""); setusername(""); setaddress(""); setphonenumber(""); setpassword(""); localStorage.removeItem('productDetail1') } 
   const register=()=>{     setShow2(true); setShow(false)}
 
   const sellerregister =()=>{
+    setizloading(true)
     axios.post(merchantRegisterURL, {firstname, lastname, email:registeremail, password, bussinessname})
     .then((response)=>{console.log(response)
     if (response.data.status)
-    {alert("HURRAY SignUp Successful"); setname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername("")}
+    {alert("HURRAY SignUp Successful"); setfirstname(""); setlastname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername("")}
     else{alert(response.data.message); setizloading(false)} handleClose2(); handleShow();
        })
+    .catch((err)=>{alert("Registration Failed, please try again later"); setizloading(false)})
   }
   const sellerlogin =()=>{
+    setizloading(true)
     axios.post(merchantSigninURL, {email:signinemail, password:signinpassword})
     .then((response)=>{console.log(response)
     if (response.data.status)
-    {alert("HURRAY SignUp Successful"); Navigate("/seller-profile"); setname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername("")}
+    {alert("HURRAY SignUp Successful"); Navigate("/seller-profile"); setname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername(""); setsigninemail(""); setsigninpassword("") }
     else{alert(response.data.message); setizloading(false)} handleClose2(); handleShow();
        })
+       .catch((err)=>{alert("Registration Failed, please try again later"); setizloading(false)})
     }
 
   const confirmsignup = () => {
@@ -118,6 +123,7 @@ let token = localStorage.token;
     {alert("HURRAY SignUp Successful"); setname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername("")}
     else{alert(response.data.message); setizloading(false)} handleClose2(); handleShow();
        })
+       .catch((err)=>{alert("Registration Failed, please try again later"); setizloading(false)})
     }
     //validemail || !validpassword || !registeremail || !name || !password || !phonenumber
     const handlenameChange =(e)=>
@@ -450,8 +456,8 @@ let token = localStorage.token;
               <p></p>
             </Carousel.Caption>
           </Carousel.Item>
-          <Carousel.Item interval={500}>
-          <img src={banner2} style={{borderRadius:"10px"}} alt="" text="Second Slide"  />
+          <Carousel.Item interval={1000}>
+          <img src={banner1} style={{borderRadius:"10px"}} alt="" text="Second Slide"  />
             <Carousel.Caption>
               <h3></h3>
               <p></p>
@@ -465,7 +471,7 @@ let token = localStorage.token;
             </Carousel.Caption>
           </Carousel.Item> */}
           <Carousel.Item>
-            <img src={banner4} style={{borderRadius:"10px"}} alt="" text="Fourth Slide" />
+            <img src={banner4} interval={1000} style={{borderRadius:"10px"}} alt="" text="Fourth Slide" />
             <Carousel.Caption>
               <h3></h3>
               <p></p>
