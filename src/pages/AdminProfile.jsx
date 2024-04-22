@@ -46,9 +46,25 @@ const AdminProfile = () => {
             >
               All products
             </Link>
+            <Link
+              to="/seller-profile/customizations"
+              className="user-nav-display"
+            >
+              Edit Theme settings
+            </Link>
           </nav>
         </div>
       </aside>
+
+      <h2
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+        }}
+      >
+        Welcome to your Admin Profile
+      </h2>
 
       <main>
         <Outlet />
