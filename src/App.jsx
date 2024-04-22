@@ -27,6 +27,7 @@ import Search from './components/Search'
  import CategoryForm from "./components/AddCategory"
  import AllProducts from "./pages/AllProducts";
   import AllCategories from "./pages/AllCategories"; 
+  import FrontendCustomization from "./pages/CustomFrontend";
   
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
       <Route path="add-category" element={<CategoryForm />} />
       <Route path="all-products" element={<AllProducts />} />
       <Route path="all-categories" element={<AllCategories />} />
+      <Route path="seller-profile/customizations" element={<FrontendCustomization />} />
     
       </Routes>
       {/* <Footer/> */}

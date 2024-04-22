@@ -57,7 +57,9 @@ const FrontendCustomization = ({}) => {
   ];
 
   return (
-    <div>
+    <div className="container-fluid">
+      <div className="row">
+      <div className="col-lg-6 mx-auto mt-5 my-3">
       <h2>Customize Your Store Theme Here</h2>
       <div>
         <h3>Color Picker</h3>
@@ -87,6 +89,10 @@ const FrontendCustomization = ({}) => {
       <button onClick={saveCustomizations} disabled={saving}>
         {saving ? "Saving..." : "Save Customizations"}
       </button>
+    </div>
+
+      </div>
+
     </div>
   );
 };

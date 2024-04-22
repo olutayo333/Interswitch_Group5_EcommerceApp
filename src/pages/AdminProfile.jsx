@@ -51,13 +51,13 @@ const AdminProfile = () => {
               to="/all-products"
               className="user-nav-display fs-5"
             >
-              All products
-            </Link>
+              <b>All products</b>
+            </Link> <hr />
             <Link
               to="/seller-profile/customizations"
-              className="user-nav-display"
+              className="user-nav-display fs-5"
             >
-              Edit Theme settings
+              <b>Edit Theme settings</b>
             </Link>
           </nav>
         </div>

@@ -16,8 +16,8 @@ import BusinessandIndustrial from './categories/BusinessandIndustrial';
 import profileIMG from "../assets/images/Ellipse 1.png"
 import banner1 from "../assets/images/Frame 30.png"; import banner2 from "../assets/images/IMG_2.png"; import banner3 from "../assets/images/IMG_1.jpg"; import banner4 from "../assets/images/IMG_3.jpg"
 
-const Nav = () => {
-  let merchantURL="http://localhost:8080"; let merchantSigninURL=`${merchantURL}/auth/login`; let merchantRegisterURL=`${merchantURL}/auth/register`; console.log(merchantRegisterURL, merchantSigninURL); 
+const Nav = () => { //https://8462-196-1-185-78.ngrok-free.app
+  let merchantURL="https://43a9-41-76-82-123.ngrok-free.app/"; let merchantSigninURL=`${merchantURL}/auth/login`; let merchantRegisterURL=`${merchantURL}/auth/register`; console.log(merchantRegisterURL, merchantSigninURL); 
   let signinURL = "https://interswitchcustomersserver.onrender.com/user/signin"; let signupURL = "https://interswitchcustomersserver.onrender.com/user/signup"; let dashboardURL = "https://interswitchcustomersserver.onrender.com/user/dashboard";
   let oldCart;
   oldCart= JSON.parse(localStorage.getItem("productDetail1")) 

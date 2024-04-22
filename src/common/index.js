@@ -1,4 +1,4 @@
-const backendDomain = "https://8462-196-1-185-78.ngrok-free.app";
+const backendDomain = "https://43a9-41-76-82-123.ngrok-free.app/"; 
 
 const SummaryApi = {
   register: {
