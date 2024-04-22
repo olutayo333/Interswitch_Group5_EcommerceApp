@@ -61,9 +61,9 @@ const FrontendCustomization = ({}) => {
       <div className="row">
       <div className="col-lg-6 mx-auto mt-5 my-3">
       <h2>Customize Your Store Theme Here</h2>
-      <div>
+      <div className="d-block mx-auto text-center">
         <h3>Color Picker</h3>
-        <ChromePicker color={selectedColor} onChange={handleColorChange} />
+        <ChromePicker className="mx-auto" color={selectedColor} onChange={handleColorChange} />
       </div>
       <div>
         <h3>Font Selector</h3>
@@ -86,7 +86,7 @@ const FrontendCustomization = ({}) => {
           </div>
         )}
       </div>
-      <button onClick={saveCustomizations} disabled={saving}>
+      <button className="btn btn-outline-secondary" onClick={saveCustomizations} disabled={saving}>
         {saving ? "Saving..." : "Save Customizations"}
       </button>
     </div>

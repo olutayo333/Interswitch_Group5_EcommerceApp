@@ -308,13 +308,13 @@ let token = localStorage.token;
           <input type="email" name="email" className='form form-control my-2' placeholder='example@gmail.com' onChange={handleEmailChange}  />
           {validemail? null : <p><small className='text-danger'>Please enter a valid email address</small></p>}
           
-          <label htmlFor=" address"  className='fw-bold mt-1' style={{color:"#4DC5DA"}} >Business Name:</label>
-          <input type="text" name="address" className='form form-control my-2' placeholder='Enter your bussiness name' onChange={(e)=>{setbussinessname(e.target.value)}} />
+          <label htmlFor=" address"  className='fw-bold mt-1' style={{color:"#4DC5DA"}} >Address</label>
+          <input type="text" name="address" className='form form-control my-2' placeholder='Enter your Physical Address' onChange={(e)=>{setaddress(e.target.value)}} />
           {/* {validemail? null : <p><small className='text-danger'>Please enter a valid email address</small></p>} */}
 
           <label htmlFor="password" className='fw-bold mt-1 ' style={{color:"#4DC5DA"}} >Password:</label>
           <input type="password" name='password' className='form form-control my-2' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' onChange={handlePasswordChange} />
-          {validpassword? null : <p><small className='text-danger'>Enter a strong password (Aa!1) </small></p>}
+          {validpassword? null : <p><small className='text-danger'>Password must contain at least one(Uppercase, LowerCase, Number & Symbol ) </small></p>}
           
           {
               ! izloading ?
@@ -341,13 +341,13 @@ let token = localStorage.token;
           <input type="email" name="email" className='form form-control my-2' placeholder='example@gmail.com' onChange={handleEmailChange}  />
           {validemail? null : <p><small className='text-danger'>Please enter a valid email address</small></p>}
           
-          <label htmlFor=" address"  className='fw-bold mt-1' style={{color:"#4DC5DA"}} >Physical Address:</label>
-          <input type="text" name="address" className='form form-control my-2' placeholder='Enter your Physical address' onChange={(e)=>{setaddress(e.target.value)}} />
+          <label htmlFor=" address"  className='fw-bold mt-1' style={{color:"#4DC5DA"}} >Bussiness Name:</label>
+          <input type="text" name="address" className='form form-control my-2' placeholder='Enter your Bussiness Name' onChange={(e)=>{setbussinessname(e.target.value)}} />
           {/* {validemail? null : <p><small className='text-danger'>Please enter a valid email address</small></p>} */}
 
           <label htmlFor="password" className='fw-bold mt-1 ' style={{color:"#4DC5DA"}} >Password:</label>
           <input type="password" name='password' className='form form-control my-2' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' onChange={handlePasswordChange} />
-          {validpassword? null : <p><small className='text-danger'>Enter a strong password</small></p>}
+          {validpassword? null : <p><small className='text-danger'>Password must contain at least one(Uppercase, LowerCase, Number & Symbol )</small></p>}
           
           {
               ! izloading ?
