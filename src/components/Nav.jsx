@@ -22,8 +22,8 @@ const Nav = () => { //https://8462-196-1-185-78.ngrok-free.app
   let oldCart;
   oldCart= JSON.parse(localStorage.getItem("productDetail1")) 
   
-  let allData = useSelector((state)=>state.counterReducer); const [count, setcount]=useState(0)
-  console.log(allData); 
+   let allData = useSelector((state)=>state.counterReducer); const [count, setcount]=useState(0)
+  // console.log(allData); 
   const Navigate = useNavigate();
   const [show, setShow] = useState(false); const handleClose = () => setShow(false); const handleShow = () => setShow(true);
   const [show2, setShow2] = useState(false); const handleClose2 = () => setShow2(false); const handleShow2 = () => setShow2(true);
@@ -94,7 +94,7 @@ let token = localStorage.token;
   const register=()=>{     setShow2(true); setShow(false)}
 
   const sellerregister =()=>{
-    axios.post(merchantSigninURL, {firstname, lastname, email:registeremail, password, bussinessname})
+    axios.post(merchantRegisterURL, {firstname, lastname, email:registeremail, password, bussinessname})
     .then((response)=>{console.log(response)
     if (response.data.status)
     {alert("HURRAY SignUp Successful"); setname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername("")}
@@ -102,7 +102,7 @@ let token = localStorage.token;
        })
   }
   const sellerlogin =()=>{
-    axios.post(merchantRegisterURL, {email:signinemail, password:signinpassword})
+    axios.post(merchantSigninURL, {email:signinemail, password:signinpassword})
     .then((response)=>{console.log(response)
     if (response.data.status)
     {alert("HURRAY SignUp Successful"); Navigate("/seller-profile"); setname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername("")}
@@ -318,7 +318,7 @@ let token = localStorage.token;
           
           {
               ! izloading ?
-              <><button onClick={confirmsignup} disabled={!validname || !validemail || !validpassword || !registeremail || !name || !password || !phonenumber || !address} type='submit' id='submit' className="btn my-2 p-2 text-light w-100" style={{backgroundColor:"#192943"}}>Create Account</button></>:
+              <><button onClick={confirmsignup} disabled={!validname || !validemail || !validpassword || !name || !password || !phonenumber || !address} type='submit' id='submit' className="btn my-2 p-2 text-light w-100" style={{backgroundColor:"#192943"}}>Create Account</button></>:
               <><button disabled className="btn my-2 p-2 text-light w-100" style={{backgroundColor:"#192943"}}> <Spinner as="span" variant='white' animation="grow" size="sm" role="status" aria-hidden="true" /> Loading... </button></>
           }
           <p>Already have a buyer account? <button className='btn btn-sm btn-outline-secondary' onClick={login}>Login here</button> </p>
@@ -351,7 +351,7 @@ let token = localStorage.token;
           
           {
               ! izloading ?
-              <><button onClick={sellerregister}  type='submit' id='submit' className="btn my-2 p-2 text-light w-100" style={{backgroundColor:"#192943"}}>Create Account</button></>:
+              <><button onClick={sellerregister}  type='submit' id='submit' className="btn my-2 p-2 text-light w-100" disabled={!validfirstname || !validlastname|| !validemail || !validpassword ||  !phonenumber || !bussinessname} style={{backgroundColor:"#192943"}}>Create Account</button></>:
               <><button disabled className="btn my-2 p-2 text-light w-100" style={{backgroundColor:"#192943"}}> <Spinner as="span" variant='white' animation="grow" size="sm" role="status" aria-hidden="true" /> Loading... </button></>
           }
           <p>Already have a seller account?  <button className='btn btn-sm btn-outline-secondary' onClick={login}>Login here</button></p>
