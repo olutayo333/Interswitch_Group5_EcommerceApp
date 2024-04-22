@@ -22,7 +22,8 @@ const Nav = () => { //https://8462-196-1-185-78.ngrok-free.app
   let oldCart;
   oldCart= JSON.parse(localStorage.getItem("productDetail1")) 
   
-   let allData = useSelector((state)=>state.counterReducer); const [count, setcount]=useState(0)
+   let allData = useSelector((state)=>state.counterReducer); 
+   const [count, setcount]=useState(0)
   // console.log(allData); 
   const Navigate = useNavigate();
   const [show, setShow] = useState(false); const handleClose = () => setShow(false); const handleShow = () => setShow(true);
@@ -32,7 +33,7 @@ const Nav = () => { //https://8462-196-1-185-78.ngrok-free.app
   const handleShowShippingForm = () => {
     if(username) { setshowShippingForm(true); setShowCart(false);}
     else if(!username) {login()}  }
-  
+    const [all, setall]= useState("")
   const [username, setusername] = useState("")
   const[useremail, setuseremail] = useState("")
   const[signinemail, setsigninemail] = useState(""); const[signinpassword, setsigninpassword]=useState("")
@@ -105,14 +106,14 @@ let token = localStorage.token;
     .catch((err)=>{alert("Registration Failed, please try again later"); setizloading(false)})
   }
   const sellerlogin =()=>{
-    setizloading(true)
+    setizloading(true) ; 
     axios.post(merchantSigninURL, {email:signinemail, password:signinpassword})
     .then((response)=>{console.log(response)
     // if (response.data)
     // {alert(response.data); Navigate("/seller-profile"); setname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername(""); setsigninemail(""); setsigninpassword("") }
     // else{alert(response.data); setizloading(false)} handleClose2(); handleShow();
        })
-       .catch((err)=>{alert("Login Failed, please try again later"); setizloading(false)})
+       .catch((err)=>{alert("Login Failed, please try again later"); setizloading(false); console.log(signinemail, signinpassword);})
     }
 
   const confirmsignup = () => {
@@ -206,24 +207,20 @@ let token = localStorage.token;
             <div className='logo col-1 mx-0 my-0' id='logoimg'> 
              <sup> <img className="img-fluid img-responsive mx-0 my-0" src={logo} alt="logo" /> </sup>
             </div>
-            <div className="col-1" style={{zIndex:1}} id='menu' >
-                        <ul className="dropdown-nav" style={{listStyleType:"none"}}>
-                            <li style={{zIndex:1}} className="nav-item dropdown px-0" >
-                                <p className="nav-link dropdown-toggle " role="button" data-bs-toggle="dropdown" aria-expanded="false"> All </p>
-                                <ul className="dropdown-menu border-0 shadow-sm" style={{zIndex:1}}>
-                                    <li className='py-0'><button className="dropdown-item">Electronics </button> </li>
-                                    <li className='py-0'><button className="dropdown-item">Motors </button> </li>
-                                    <li className='py-0'><button className="dropdown-item">Home & Garden </button> </li>
-                                    <li className='py-0'><button className="dropdown-item">Clothings </button> </li>
-                                    <li className='py-0'><button className="dropdown-item">Sports </button> </li>
-                                    <li className='py-0'><button className="dropdown-item">Health & Beauty</button> </li>
-                                    <li className='py-0'><button className="dropdown-item">Toys </button> </li>
-                                    <li className='py-0'><button className="dropdown-item">Business & Industrial </button> </li>
-                                    <li className='py-0'><button className="dropdown-item">Collectables </button> </li>
-                                </ul>
-                            </li> 
-                          </ul>
-                </div>
+            <div className="col-3 me-5" style={{zIndex:1, width:"5px"}} id='' >
+              {/* <select className=" my-2 "id="" value={all} style={{zIndex:1}}
+                  onChange={(e) => setall(e.target.value)}>
+                  <option value="">All</option>
+                  <option value="electronics">Electronics</option>
+                  <option value="motors">Motors</option>
+                  <option value="home and garden">Home & Garden</option>
+                  <option value="clothing">Clothing</option>
+                  <option value="health and beauty">Health and Beauty</option>
+                  <option value="toys">Toys</option>
+                  <option value="bussiness and industrial">Bussiness & Industrial</option>
+                  <option value="collectables">Collectables</option>
+              </select>            */}
+            </div>
             <div className='col-10 search_box ' id='searchBar' > 
             <input type="text" style={{width:"60vw"}} placeholder='search for anything' />  <button onClick={()=>Navigate("/search")} className='btn btn-primary'>Search </button> <button className='btn btn-tertiary' id='advancedbtn'>Advanced</button>
             </div>
@@ -273,14 +270,18 @@ let token = localStorage.token;
           <h4 className='d-flex justify-content-center'>Buyer's Login </h4>
           <input type="email" name="email" className='form form-control my-2' placeholder='example@gmail.com' onChange={(e)=>setsigninemail(e.target.value)} />
           <input type="password" name='password' className='form form-control' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' onChange={(e)=>setsigninpassword(e.target.value)} /> <hr />
-          <button className='btn btn-outline-danger' onClick={confirmlogin}> Siginin </button>
+          <button className='btn btn-outline-danger col-12' onClick={confirmlogin}> Siginin </button>
           <p>Dont't have a Buyer Account Yet? <button className='btn btn-sm btn-outline-secondary' onClick={register}> Register Here</button> </p>
           </>:
           <>
           <h4 className='d-flex justify-content-center'>Merchant's Login</h4>
           <input type="email" name="email" className='form form-control my-2' placeholder='example@gmail.com' onChange={(e)=>setsigninemail(e.target.value)} />
           <input type="password" name='password' className='form form-control' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' onChange={(e)=>setsigninpassword(e.target.value)}/> <hr />
-          <button className='btn btn-outline-danger' onClick={sellerlogin}> Siginin </button>
+          {
+              ! izloading ?
+              <><button className='btn btn-outline-danger btn-lg col-12 mb-2' onClick={sellerlogin}> Siginin </button></>:
+              <><button disabled className='btn btn-outline-danger btn-lg col-12 mb-2' style={{backgroundColor:"#192943"}}> <Spinner as="span" variant='white' animation="grow" size="sm" role="status" aria-hidden="true" /> Loading... </button></>
+          }
           <p>Dont't have a Seller Account Yet?<button className='btn btn-sm btn-outline-secondary' onClick={register}> Register Here</button></p>
           </>
           }

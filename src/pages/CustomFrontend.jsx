@@ -59,13 +59,13 @@ const FrontendCustomization = ({}) => {
   return (
     <div className="container-fluid">
       <div className="row">
-      <div className="col-lg-6 mx-auto mt-5 my-3">
-      <h2>Customize Your Store Theme Here</h2>
+      <div className="col-lg-6 mx-auto mt-5 my-3 text-center py-3">
+      <h2 className="mt-2"><u>Customize Your Store Theme Here</u></h2>
       <div className="d-block mx-auto text-center">
         <h3>Color Picker</h3>
         <ChromePicker className="mx-auto" color={selectedColor} onChange={handleColorChange} />
       </div>
-      <div>
+      <div className="my-3">
         <h3>Font Selector</h3>
         <Select options={fontOptions} onChange={handleFontChange} />
       </div>
@@ -74,8 +74,8 @@ const FrontendCustomization = ({}) => {
         <Dropzone onDrop={handleLogoDrop}>
           {({ getRootProps, getInputProps }) => (
             <div {...getRootProps()}>
-              <input {...getInputProps()} />
-              <p>Drag and drop logo file here, or click to select file</p>
+              <input {...getInputProps()} className="form-control form" />
+              <p className="btn btn-danger">Drag and drop logo file here, or click to select file</p>
             </div>
           )}
         </Dropzone>
