@@ -6,6 +6,8 @@ import SummaryApi from "../common";
 import axios from "axios"; import { useEffect } from "react"; 
 
 const FrontendCustomization = ({}) => {
+  let dashboardURL = 'https://interswitchcustomersserver.onrender.com/user/merchantDashboard'  
+  
   useEffect(()=>{
     axios.get(dashboardURL,{ headers: { "Authorization": `Bearer ${token}`,  "Content-Type": "application/json", "Accept": "application/json" } })
     .then((response)=>{

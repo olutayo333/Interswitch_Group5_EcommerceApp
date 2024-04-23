@@ -13,6 +13,8 @@ const AllProducts = () => {
   const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(()=>{
+    let dashboardURL = 'https://interswitchcustomersserver.onrender.com/user/merchantDashboard'  
+  
     axios.get(dashboardURL,{ headers: { "Authorization": `Bearer ${token}`,  "Content-Type": "application/json", "Accept": "application/json" } })
     .then((response)=>{
         if(!response.data.status){alert(response.data.message); Navigate('/home')}
