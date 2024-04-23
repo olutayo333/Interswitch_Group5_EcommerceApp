@@ -26,7 +26,6 @@ Postman Collection: https://grey-robot-178198.postman.co/workspace/My-Workspace~
 
 Acknowledgements Special thanks to the developers of React, MongoDB, NodeJS, Java Spring Boot, Lombok, Spring Data JPA, and MySQL for providing the tools and technologies necessary to build this ecommerce platform.
 
-Team Members Zikrulahi Atobatele - (Team Lead), Uzoma Nwachukwu, Tokunbo Ogunjobi, Victor Otubure, Samuel Onyedikachi - (PM)
 FRONTEND 
 Olutayo Stephen (Frontend team lead)
 Oluwagbeminiyi Ojomo
