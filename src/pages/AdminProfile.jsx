@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";    
 import { useSelector } from "react-redux";
 import { FaRegCircleUser } from "react-icons/fa6";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import Navbar from "../component/Navbar/Index";
-
+import axios from "axios";
 import "./AdminProfile.css";
 
 const AdminProfile = () => {
+  const[firstname, setfirstname] = useState(""); const[lastname, setlastname]=useState(''); const[bussinessname, setbussinessname]=useState("")
+  const[merchantCode, setmerchantCode]=useState(''); const[useremail,setuseremail]= useState("") 
+  const Navigate = useNavigate(); let dashboardURL = 'https://interswitchcustomersserver.onrender.com/user/merchantDashboard'  
+  
+  useEffect(()=>{
+    axios.get(dashboardURL,{ headers: { "Authorization": `Bearer ${token}`,  "Content-Type": "application/json", "Accept": "application/json" } })
+    .then((response)=>{
+        if(!response.data.status){alert(response.data.message); Navigate('/home')}
+        else if (response.data.status){
+            console.log(response);
+            setuseremail(response.data.user.email); setfirstname(response.data.user.firstname); setbussinessname(response.data.user.bussinessname)
+            setlastname(response.data.user.lastname) ; setmerchantCode(response.data.user.merchantCode)
+        }
+    })
+  }, [])
+  let token = localStorage.token;
+
   const user = useSelector((state) => state?.user?.user);
   return (
     <>
@@ -70,7 +87,11 @@ const AdminProfile = () => {
           alignContent: "center",
         }}
       >
-        Welcome to your Admin Profile
+        <center className="mt-5 ">Welcome to your Admin Profile <br/> <hr />
+          <p>{`Name: ${firstname} ${lastname}`} </p>  
+          <p>{`Merchant Code: ${merchantCode}`} </p>
+          <p>{`Bussiness Name: ${bussinessname}`} </p>
+        </center>
       </h2>
 
       <main>

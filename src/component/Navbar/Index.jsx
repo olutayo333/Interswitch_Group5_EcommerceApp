@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; import { useNavigate } from 'react-router-dom';
 import {
   Nav,
   NavLink,
@@ -12,6 +12,11 @@ import {
 import SearchInput from "./SearchInput";
 
 const Navbar = () => {
+  const Navigate = useNavigate();
+  const logout = () =>{
+     Navigate("/")
+    localStorage.token = "";
+  }
   return (
     <>
       <Nav>
@@ -49,7 +54,9 @@ const Navbar = () => {
             </div>
           </div> */}
           <SearchInput />
+          
         </NavMenu>
+        <button onClick={logout} className="btn btn-small text-danger">Logout</button>
       </Nav>
     </>
   );

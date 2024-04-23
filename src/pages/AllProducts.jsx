@@ -12,6 +12,13 @@ const AllProducts = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
+  useEffect(()=>{
+    axios.get(dashboardURL,{ headers: { "Authorization": `Bearer ${token}`,  "Content-Type": "application/json", "Accept": "application/json" } })
+    .then((response)=>{
+        if(!response.data.status){alert(response.data.message); Navigate('/home')}
+    })
+  }, [])
+
   useEffect(() => {
     // Fetch products from the backend API when the component mounts
     const fetchProducts = async () => {

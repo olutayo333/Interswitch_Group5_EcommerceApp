@@ -170,6 +170,10 @@ z-index: 1;  border-radius: 5px;
         /* margin-bottom: 50px; */
         /* color: #0d2153; */
     }
+    #footer{
+        display: none;
+    }
+    
     
 }
 /* ============ mobile view .end// ============ */

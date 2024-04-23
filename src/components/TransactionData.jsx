@@ -3,7 +3,7 @@ import axios from "axios";
 import SummaryApi from "../common";
 import Navbar from "../component/Navbar/Index";
 
-const TransactionList = () => {
+  const TransactionList = () => {
   const [transactions, setTransactions] = useState([]);
   const [filteredTransactions, setFilteredTransactions] = useState([]);
   const [filterType, setFilterType] = useState("");
@@ -85,8 +85,9 @@ const TransactionList = () => {
               <th>Price</th>
             </tr>
           </thead>
-          <tbody>
-            {filteredTransactions.map((transaction, index) => (
+          
+          <tbody> 
+             {filteredTransactions.map((transaction, index) => (
               <tr key={index}>
                 <td>{transaction.date}</td>
                 <td>{transaction.item}</td>
@@ -94,7 +95,8 @@ const TransactionList = () => {
                 <td>{transaction.quantity}</td>
                 <td>{transaction.price}</td>
               </tr>
-            ))}
+            ))} 
+            
           </tbody>
         </table>
       </div>

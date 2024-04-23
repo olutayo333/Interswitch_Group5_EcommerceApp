@@ -90,7 +90,7 @@ const productDetail2=(items)=>{
           </Modal.Footer>
       </Modal>
 
-      <Footer/>
+      <div id='footer'><Footer/></div>
     </div>
 
   )

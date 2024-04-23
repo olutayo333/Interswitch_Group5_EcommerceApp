@@ -5,7 +5,7 @@ import viteLogo from '/vite.svg'
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './components/Home'
-// import Mod from './components/Mod'
+import Mod from './components/Mod'
 import BusinessandIndustrial from './components/categories/BusinessandIndustrial'
 import Clothing from './components/categories/Clothing'
 import Collectables from './components/categories/Collectables'
@@ -37,7 +37,7 @@ function App() {
     <BrowserRouter>
       <Routes>
       <Route path='/' element={<Home/>}/>
-      {/* <Route path="mod" element={<Mod/>} /> */}
+      <Route path="mod" element={<Mod/>} />
       <Route path='home' element={<Home/>}/>
       <Route path='businessandindustrial' element={<BusinessandIndustrial/>}/>
       <Route path='clothing' element={<Clothing/>} />

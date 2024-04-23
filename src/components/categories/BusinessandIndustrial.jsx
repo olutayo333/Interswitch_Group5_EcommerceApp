@@ -87,8 +87,8 @@ const productDetail2=(items)=>{
             <button className='btn mx-auto w-75 btn-secondary' onClick={handleCloseDetail}> Close </button>
           </Modal.Footer>
       </Modal>
+        <div id='footer'><Footer/></div>
 
-      <Footer/>
     </div>
 
   )

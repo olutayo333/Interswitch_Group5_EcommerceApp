@@ -3,9 +3,16 @@ import { ChromePicker } from "react-color";
 import Select from "react-select";
 import Dropzone from "react-dropzone";
 import SummaryApi from "../common";
-import axios from "axios";
+import axios from "axios"; import { useEffect } from "react"; 
 
 const FrontendCustomization = ({}) => {
+  useEffect(()=>{
+    axios.get(dashboardURL,{ headers: { "Authorization": `Bearer ${token}`,  "Content-Type": "application/json", "Accept": "application/json" } })
+    .then((response)=>{
+        if(!response.data.status){alert(response.data.message); Navigate('/home')}
+    })
+  }, [])
+
   // State variables to store customization options
   const [selectedColor, setSelectedColor] = useState("#000000");
   const [selectedFont, setSelectedFont] = useState("");
