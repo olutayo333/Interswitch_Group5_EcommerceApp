@@ -49,7 +49,8 @@ function App() {
       <Route path='sports' element={<Sports/>} />
       <Route path='toys' element={<Toys/>} />
       <Route path='search' element={<Search/>} />
-      
+      <Route path='/*' element={<Home/>}/>
+
       <Route path="store" element={<Store />} />
       <Route path="about" element={<About />} />
       <Route path="feedback" element={<Feedback />} />
@@ -58,7 +59,7 @@ function App() {
       <Route path="all-products" element={<AllProducts />} />
       <Route path="all-categories" element={<AllCategories />} />
       <Route path="seller-profile/customizations" element={<FrontendCustomization />} />
-    
+
       </Routes>
       {/* <Footer/> */}
     </BrowserRouter>
