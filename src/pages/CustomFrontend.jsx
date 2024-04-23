@@ -4,6 +4,7 @@ import Select from "react-select";
 import Dropzone from "react-dropzone";
 import SummaryApi from "../common";
 import axios from "axios"; import { useEffect } from "react"; 
+import Navbar from "../component/Navbar/Index";
 
 const FrontendCustomization = ({}) => {
   let dashboardURL = 'https://interswitchcustomersserver.onrender.com/user/merchantDashboard'  
@@ -14,6 +15,7 @@ const FrontendCustomization = ({}) => {
         if(!response.data.status){alert(response.data.message); Navigate('/home')}
     })
   }, [])
+  let token = localStorage.token;
 
   // State variables to store customization options
   const [selectedColor, setSelectedColor] = useState("#000000");
@@ -67,6 +69,7 @@ const FrontendCustomization = ({}) => {
 
   return (
     <div className="container-fluid">
+      <Navbar/>
       <div className="row">
       <div className="col-lg-6 mx-auto mt-5 my-3 text-center py-3">
       <h2 className="mt-2"><u>Customize Your Store Theme Here</u></h2>
@@ -101,7 +104,7 @@ const FrontendCustomization = ({}) => {
     </div>
 
       </div>
-
+        
     </div>
   );
 };

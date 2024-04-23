@@ -11,7 +11,8 @@ const AllCategories = () => {
     .then((response)=>{
         if(!response.data.status){alert(response.data.message); Navigate('/home')}
     })
-  }, [])
+  }, []) 
+  let token = localStorage.token;
   return <TransactionList />;
   
 };

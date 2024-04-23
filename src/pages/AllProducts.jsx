@@ -20,6 +20,7 @@ const AllProducts = () => {
         if(!response.data.status){alert(response.data.message); Navigate('/home')}
     })
   }, [])
+  let token = localStorage.token;
 
   useEffect(() => {
     // Fetch products from the backend API when the component mounts
@@ -81,7 +82,7 @@ const AllProducts = () => {
     <Navbar/> <hr />
     <div className="container-fluid"> 
       <div className="row" id="desctopView">
-        <div className="title">
+        <div className=" row">
          <div className="col-lg-3  "> <h2 style={{ fontWeight: "bold" }}>All Products</h2> </div>
           <div className="col-lg-3">
             <button className="btn col-12" onClick={() => setOpenUploadModal(true)}>Upload Product</button>

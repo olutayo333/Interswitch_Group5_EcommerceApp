@@ -10,6 +10,7 @@ const Store = () => {
         if(!response.data.status){alert(response.data.message); Navigate('/home')}
     })
   }, [])
+  let token = localStorage.token;
   return (
     <div>
       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut similique
