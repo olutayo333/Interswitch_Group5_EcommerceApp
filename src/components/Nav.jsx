@@ -99,40 +99,40 @@ let token = localStorage.token;
 
   const sellerregister =()=>{
     setizloading(true)  //merchantRegisterURL
-    axios.post(NodeMerchantURL, {firstname, lastname, email:registeremail, password, bussinessname})
-    .then((response)=>{console.log(response)
-    if (response.data.status)
-    {alert(response.data.message); setfirstname(""); setlastname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername(""); setizloading(false)}
-    else{alert(response.data.message); setizloading(false)} handleClose2(); handleShow();
-       })
-    .catch((err)=>{alert("Registration Failed, please try again later"); setizloading(false)})
-  }
-    //   axios.post(merchantRegisterURL, {firstname, lastname, email:registeremail, password, bussinessname})
+  //   axios.post(NodeMerchantURL, {firstname, lastname, email:registeremail, password, bussinessname})
   //   .then((response)=>{console.log(response)
-  //   if (response.data=="Merchant registered successfully")
-  //   {alert(response.data); setfirstname(""); setlastname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername(""); setizloading(false)}
-  //   else{alert(response.data); setizloading(false)} handleClose2(); handleShow();
+  //   if (response.data.status)
+  //   {alert(response.data.message); setfirstname(""); setlastname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername(""); setizloading(false)}
+  //   else{alert(response.data.message); setizloading(false)} handleClose2(); handleShow();
   //      })
   //   .catch((err)=>{alert("Registration Failed, please try again later"); setizloading(false)})
   // }
+      axios.post(merchantRegisterURL, {firstname, lastname, email:registeremail, password, bussinessname})
+    .then((response)=>{console.log(response)
+    if (response.data=="Merchant registered successfully")
+    {alert(response.data); setfirstname(""); setlastname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername(""); setizloading(false)}
+    else{alert(response.data); setizloading(false)} handleClose2(); handleShow();
+       })
+    .catch((err)=>{alert("Registration Failed, please try again later"); setizloading(false)})
+  }
   const sellerlogin =()=>{
     setizloading(true) ; 
-    axios.post(nodeMerchantSigninURL, {email:signinemail, password:signinpassword})
-    .then((response)=>{console.log(response)
-     if (response.data.status)
-     {alert(response.data.message); Navigate("/seller-profile"); localStorage.token = response.data.token; setlastname(""); setfirstname(""); setsigninemail(""); setsigninpassword("") }
-     else{alert(response.data.message); setizloading(false)} handleClose2(); handleShow();
-       })
-       .catch((err)=>{alert("Login Failed, please try again later"); setizloading(false); console.log(signinemail, signinpassword);})
-    }
-    // axios.post(merchantSigninURL, {email:signinemail, password:signinpassword})
+    // axios.post(nodeMerchantSigninURL, {email:signinemail, password:signinpassword})
     // .then((response)=>{console.log(response)
-    //  if (response.data)
-    //  {alert(response.data); Navigate("/seller-profile"); setname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername(""); setsigninemail(""); setsigninpassword("") }
-    //  else{alert(response.data); setizloading(false)} handleClose2(); handleShow();
+    //  if (response.data.status)
+    //  {alert(response.data.message); Navigate("/seller-profile"); localStorage.token = response.data.token; setlastname(""); setfirstname(""); setsigninemail(""); setsigninpassword("") }
+    //  else{alert(response.data.message); setizloading(false)} handleClose2(); handleShow();
     //    })
     //    .catch((err)=>{alert("Login Failed, please try again later"); setizloading(false); console.log(signinemail, signinpassword);})
     // }
+    axios.post(merchantSigninURL, {email:signinemail, password:signinpassword})
+    .then((response)=>{console.log(response)
+     if (response.data)
+     {alert(response.data); Navigate("/seller-profile"); setname(""); setregisteremail(""); setpassword(""); setphonenumber(""); setaddress("") ;setusername(""); setsigninemail(""); setsigninpassword("") }
+     else{alert(response.data); setizloading(false)} handleClose2(); handleShow();
+       })
+       .catch((err)=>{alert("Login Failed, please try again later"); setizloading(false); console.log(signinemail, signinpassword);})
+    }
 
   const confirmsignup = () => {
     setizloading(true)

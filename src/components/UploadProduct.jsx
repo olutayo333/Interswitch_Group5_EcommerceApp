@@ -246,10 +246,7 @@ const UploadProduct = ({ onClose }) => {
         </form>
       </div>
       {openFullScreenImage && (
-        <DisplayImage
-          onClose={() => setOpenFullScreenImage(false)}
-          imgUrl={fullScreenImage}
-        />
+        <DisplayImage onClose={() => setOpenFullScreenImage(false)} imgUrl={fullScreenImage} />
       )}
     </div>
   );
