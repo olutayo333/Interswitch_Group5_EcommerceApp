@@ -321,26 +321,53 @@ let token = localStorage.token;
             buyerregistration?
           <>
           <h4 className='d-flex justify-content-center'> <u>Buyer's Registration</u></h4>
+          
           <label htmlFor="full name" className='fw-bold' style={{color:"#4DC5DA"}} >Full Name:</label>
-          <input type="text" className='form form-control' id='nameID'  placeholder='firstname&nbsp;&nbsp;lastname' onChange={handlenameChange} />
-          {validname? null : <p><small className='text-danger'>Please enter a valid name</small></p> }
+          {
+            validname? 
+            <>
+              <input type="text" className='form form-control' id='nameID' placeholder='firstname&nbsp;&nbsp;lastname' onChange={handlenameChange} />
+              {/* {validname? null : <p><small className='text-danger'>Please enter a valid name</small></p> }   */}
+            </> :
+            <>
+              <input type="text" className='form form-control' id='nameID' style={{outline:"1px solid red", border:"1px solid red"}} placeholder='FirstName&nbsp;&nbsp;LastName  ' onChange={handlenameChange} />
+              <p><small className='text-danger'>Please enter a valid name</small></p> 
+            </>
+          }
           
           <label htmlFor="phone number" className='fw-bold mt-1' style={{color:"#4DC5DA"}} >Phone Number:</label>
           <input type="number" className='form form-control' placeholder='enter phone number'  name='phone' onChange={(e)=>{setphonenumber(e.target.value)}} />
           {/* {validphonenumber? null : <p><small className='text-danger'>Please enter a valid phonenumber</small></p>} */}
           
           <label htmlFor="email address"  className='fw-bold mt-1' style={{color:"#4DC5DA"}} >Email Address:</label>
-          <input type="email" name="email" className='form form-control my-2' placeholder='example@gmail.com' onChange={handleEmailChange}  />
-          {validemail? null : <p><small className='text-danger'>Please enter a valid email address</small></p>}
-          
+          {
+            validemail ?
+            <>
+              <input type="email" name="email" className='form form-control my-2' placeholder='example@gmail.com' onChange={handleEmailChange}  />
+            </> :
+            <>
+              <input type="email" name="email" style={{outline:"1px solid red", border:"1px solid red"}} className='form form-control my-2' placeholder='example@gmail.com' onChange={handleEmailChange}  />
+                <p><small className='text-danger'>Please enter a valid email address</small></p>
+            </>
+          }
+               
           <label htmlFor=" address"  className='fw-bold mt-1' style={{color:"#4DC5DA"}} >Address</label>
           <input type="text" name="address" className='form form-control my-2' placeholder='Enter your Physical Address' onChange={(e)=>{setaddress(e.target.value)}} />
           {/* {validemail? null : <p><small className='text-danger'>Please enter a valid email address</small></p>} */}
 
           <label htmlFor="password" className='fw-bold mt-1 ' style={{color:"#4DC5DA"}} >Password:</label>
-          <input type="password" name='password' className='form form-control my-2' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' onChange={handlePasswordChange} />
-          {validpassword? null : <p><small className='text-danger'>Password must contain at least one(Uppercase, LowerCase, Number & Symbol ) </small></p>}
-          
+          {
+            validpassword ?
+            <>
+              <input type="password" name='password' className='form form-control my-2' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' onChange={handlePasswordChange} />
+            </>:
+            <>
+                <input type="password" name='password' className='form form-control my-2' style={{border:"1px solid red", oultine: "1px solid red"}} placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' onChange={handlePasswordChange} />
+                 <p><small className='text-danger'>Password must contain at least one(Uppercase, LowerCase, Number & Symbol ) </small></p>
+         
+            </>
+          }
+         
           {
               ! izloading ?
               <><button onClick={confirmsignup} disabled={!validname || !validemail || !validpassword || !name || !password || !phonenumber || !address} type='submit' id='submit' className="btn my-2 p-2 text-light w-100" style={{backgroundColor:"#192943"}}>Create Account</button></>:
